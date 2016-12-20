@@ -2,18 +2,15 @@
 CQ.mainApp.frameController
 	.controller('mainController', ['$scope', '$rootScope', '$state', 
 		function($scope, $rootScope, $state) {
-			console.log("mainController", "start!");
-		 /**
-         * UI框架初始化
-         */
-        $scope.cardNums = 0;
+		console.log("mainController", "start!");
+		$rootScope.mainController = false;
+		$scope.cardNums = 0;
 		$scope.$on('$includeContentLoaded', function(event, data) {
 			$scope.cardNums += 1;
-			if($rootScope.headerController && $rootScope.leftbarController && 
-				$rootScope.themeController && $rootScope.dashboardController &&
-				$scope.cardNums == 4) {
-					App.init();
-					Dashboard.init();
+			if($scope.cardNums == 3) {
+					//App.init();
+					//Dashboard.init();
+					$rootScope.mainController = true;
 					console.log("UI框架初始化完成");
 			}
         });
@@ -22,13 +19,11 @@ CQ.mainApp.frameController
 		function($scope, $rootScope, $state) {
 			$rootScope.headerController = true;
 			console.log("headerController", "start!");
-		 
 	}])
 	.controller('leftbarController', ['$scope', '$rootScope', '$state', 
 		function($scope, $rootScope, $state) {
 			$rootScope.leftbarController = true;
-			console.log("leftbarController", "start!");
-		 
+			console.log("leftbarController", "start!"); 
 	}])
 	.controller('themeController', ['$scope', '$rootScope', '$state', 
 		function($scope, $rootScope, $state) {

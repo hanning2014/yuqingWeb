@@ -10,16 +10,18 @@ CQ.mainApp = {
     searchController:        angular.module("search.Controller", [])
 };
 angular.module('mainApp', [
-	"ui.router",
-	"ui.bootstrap",
+    "ui.router",
+    "ui.bootstrap",
     "frame.controller",
-    "dashboard.Controller"
+    "frame.services",
+    "dashboard.Controller",
+    "monitor.Controller"
     ])
     .config(["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider",
         function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
             //Enable cross domain calls
             $httpProvider.defaults.useXDomain = true;
-            // $urlRouterProvider.otherwise("/index");
+            $urlRouterProvider.otherwise("/dashboard");
             // $stateProvider
             //     .state('index', {
             //         url: "/index",
@@ -49,6 +51,5 @@ angular.module('mainApp', [
 
         function locationChangeSuccess(event) {
             console.log("mainApp locationChangeSuccess");
-      
         }
     }]);

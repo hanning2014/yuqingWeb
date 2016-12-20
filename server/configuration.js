@@ -5,7 +5,7 @@ module.exports = {
         baseUrl: "/yuqing"
     },
 	RESTAPI:{
-		basicUrl: "http://192.168.2.123:8000/bi/v1/",
+	basicUrl: "http://localhost:8000/bi/v1/",
         apikey: "309dea40e47f447ca83efb6407cea0c9",
         username: "",
         userToken: ""

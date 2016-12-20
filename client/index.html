@@ -42,10 +42,15 @@
 		</div>
 		<div ng-include = "'/static/commons/pages/leftbar.html'" ng-controller = "leftbarController">
 		</div>
-		<div ng-include = "'/static/modules/dashboard/pages/dashboard.html'" ng-controller = "dashboardController">
+		<div ui-view>
 		</div>
 		<div ng-include = "'/static/commons/pages/theme.html'" ng-controller = "themeController">
 		</div>
+		<!-- begin #footer -->
+		<div id="footer" class="footer">
+		    &copy; 2016 陕西省天地网实验室 All Rights Reserved
+		</div>
+		<!-- end #footer -->
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 		<!-- end scroll to top btn -->
@@ -100,10 +105,16 @@
 	<script type="text/javascript" src = "/static/modules/utils.js"></script>
 	<script type="text/javascript" src = "/static/modules/app.js"></script>
 	<script type="text/javascript" src = "/static/commons/controllers/mainController.js"></script>
+	<script type="text/javascript" src = "/static/commons/service/commonServices.js"></script>
 	<!-- ================== END COMMON DESIGN JS ================== -->
 
 	<!-- ================== dashboard JS ================== -->
 	<script type="text/javascript" src = "/static/modules/dashboard/controllers/dashboardController.js"></script>
 	<!-- ================== END dashboard JS ================== -->
+
+		<!-- ================= MONITOR JS ================== -->
+	<script type="text/javascript" src = "/static/modules/monitor/monitorControllerSettings.js"></script>
+	<script type="text/javascript" src = "/static/modules/monitor/controllers/monitorController.js"></script>
+	<!-- ================== END MONI JS ================== -->
 </body>
 </html>
