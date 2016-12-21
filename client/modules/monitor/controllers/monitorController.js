@@ -5,7 +5,7 @@ CQ.mainApp.monitorController
         //页面UI初始化；
         $scope.$on('$viewContentLoaded', function() {
             if($rootScope.mainController) {
-                App.init();
+                App.runui();
                 //Dashboard.init();
             }
         });

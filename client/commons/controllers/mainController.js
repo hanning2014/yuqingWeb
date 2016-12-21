@@ -8,7 +8,7 @@ CQ.mainApp.frameController
 		$scope.$on('$includeContentLoaded', function(event, data) {
 			$scope.cardNums += 1;
 			if($scope.cardNums == 3) {
-					//App.init();
+					App.init();
 					//Dashboard.init();
 					$rootScope.mainController = true;
 					console.log("UI框架初始化完成");
