@@ -23,11 +23,11 @@ angular.module('mainApp', [
             $httpProvider.defaults.useXDomain = true;
             $urlRouterProvider.otherwise("/dashboard");
             // $stateProvider
-            //     .state('index', {
-            //         url: "/index",
-            //         templateUrl: "/static/modules/index/pages/index.html",
-            //         controller: "indexController"
-            //     });
+            // .state('dashboard', {
+            //     url: "/dashboard",
+            //     templateUrl: "/static/modules/dashboard/pages/dashboard.html",
+            //     controller: "dashboardController"
+            // });
         }
     ])
     .run(['$rootScope', '$window', '$location', '$log', function($rootScope, $window, $location, $log) {

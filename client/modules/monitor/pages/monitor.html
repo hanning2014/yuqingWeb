@@ -15,140 +15,388 @@
         overflow-y: hidden;
         overflow-x: auto;
     }
+    .b-r-1{
+        border-right: 1px solid #575d63 ;
+    }
 </style>
 <!-- begin #content -->
-<div id="content" class="content">
-    <!-- begin page-header -->
-    <h1 class="page-header">Page with Footer <small>header small text goes here...</small></h1>
-    <div class = "m-5">
+<div id = "content" class = "content">
+    <div id="topics" class="m-b-5">
+        <!-- <span class="gallery-option-set" id="filter" data-option-key="filter">
+            <a href="" class="btn btn-default btn-xs active" data-option-value="*">
+                Show All
+            </a>
+            
+        </span> -->
+        <div class="btn-group m-r-5 m-b-5">
+            <a href="javascript:;" class="btn btn-primary btn-lg">Default</a>
+            <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu pull-right f-s-14">
+                <li><a href="javascript:;">Action 1</a></li>
+                <li><a href="javascript:;">Action 2</a></li>
+                <li><a href="javascript:;">Action 3</a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:;">Action 4</a></li>
+            </ul>
+        </div>
+        <div class="btn-group m-r-5 m-b-5">
+            <a href="javascript:;" class="btn btn-primary btn-lg">Default</a>
+            <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu pull-right f-s-14">
+                <li><a href="javascript:;">Action 1</a></li>
+                <li><a href="javascript:;">Action 2</a></li>
+                <li><a href="javascript:;">Action 3</a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:;">Action 4</a></li>
+            </ul>
+        </div>
+        <div class="btn-group m-r-5 m-b-5">
+            <a href="javascript:;" class="btn btn-primary btn-lg">Default</a>
+            <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu pull-right f-s-14">
+                <li><a href="javascript:;">Action 1</a></li>
+                <li><a href="javascript:;">Action 2</a></li>
+                <li><a href="javascript:;">Action 3</a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:;">Action 4</a></li>
+            </ul>
+        </div>
     </div>
-    <!-- end page-header -->
-    <div class = "col-md-12 height-full bg-silver-darker">
-        <div class= "p-t-10">
-        <div class = "col-md-3 height-full p-1">
-            <div class="panel panel-inverse">
-                <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>  
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+    <hr style ="border-bottom: 1px solid #CAD0D6; " class = "m-t-5 m-b-5">
+    <div class="row">
+        <!-- begin moitor content-->
+        <div class = "col-md-12 bg-black-lighter">
+                  <!-- begin panel -->
+                <div class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1" data-sortable-id="ui-widget-7">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">Panel with Slimscroll</h4>
                     </div>
-                    <h4 class="panel-title">考研</h4>
-                </div>
-                <div class="panel-body height-lg pore">
-                    <div class = "overflow-y-scroll poab overflow-x-hidden h-500">
-                        <ul class="media-list media-list-with-divider media-messaging">
-                                    <li class="media media-sm">
-                                        <a href="javascript:;" class="pull-left">
-                                            <img src="assets/img/user-5.jpg" alt="" class="media-object rounded-corner">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">John Doe</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id nunc non eros fermentum vestibulum ut id felis. Nunc molestie libero eget urna aliquet, vitae laoreet felis ultricies. Fusce sit amet massa malesuada, tincidunt augue vitae, gravida felis.</p>
-                                        </div>
-                                    </li>
-                                    <li class="media media-sm">
-                                        <a href="javascript:;" class="pull-left">
-                                            <img src="assets/img/user-6.jpg" alt="" class="media-object rounded-corner">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">Terry Ng</h5>
-                                            <p>Sed in ante vel ipsum tristique euismod posuere eget nulla. Quisque ante sem, scelerisque iaculis interdum quis, eleifend id mi. Fusce congue leo nec mauris malesuada, id scelerisque sapien ultricies.</p>
-                                        </div>
-                                    </li>
-                                    <li class="media media-sm">
-                                        <a href="javascript:;" class="pull-left">
-                                            <img src="assets/img/user-8.jpg" alt="" class="media-object rounded-corner">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">Fiona Log</h5>
-                                            <p>Pellentesque dictum in tortor ac blandit. Nulla rutrum eu leo vulputate ornare. Nulla a semper mi, ac lacinia sapien. Sed volutpat ornare eros, vel semper sem sagittis in. Quisque risus ipsum, iaculis quis cursus eu, tristique sed nulla.</p>
-                                        </div>
-                                    </li>
-                                    <li class="media media-sm">
-                                        <a href="javascript:;" class="pull-left">
-                                            <img src="assets/img/user-7.jpg" alt="" class="media-object rounded-corner">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">John Doe</h5>
-                                            <p>Morbi molestie lorem quis accumsan elementum. Morbi condimentum nisl iaculis, laoreet risus sed, porta neque. Proin mi leo, dapibus at ligula a, aliquam consectetur metus.</p>
-                                        </div>
-                                    </li>
-                                     <li class="media media-sm">
-                                        <a href="javascript:;" class="pull-left">
-                                            <img src="assets/img/user-8.jpg" alt="" class="media-object rounded-corner">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">Fiona Log</h5>
-                                            <p>Pellentesque dictum in tortor ac blandit. Nulla rutrum eu leo vulputate ornare. Nulla a semper mi, ac lacinia sapien. Sed volutpat ornare eros, vel semper sem sagittis in. Quisque risus ipsum, iaculis quis cursus eu, tristique sed nulla.</p>
-                                        </div>
-                                    </li>
-                                    <li class="media media-sm">
-                                        <a href="javascript:;" class="pull-left">
-                                            <img src="assets/img/user-7.jpg" alt="" class="media-object rounded-corner">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">John Doe</h5>
-                                            <p>Morbi molestie lorem quis accumsan elementum. Morbi condimentum nisl iaculis, laoreet risus sed, porta neque. Proin mi leo, dapibus at ligula a, aliquam consectetur metus.</p>
-                                        </div>
-                                    </li>
-                                </ul>
+                    <div class="panel-body">
+                        <div data-scrollbar="true" data-height="800px">
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed enim arcu. 
+                                Ut posuere in ligula quis ultricies. In in justo turpis. Donec ut dui at massa gravida 
+                                interdum nec vitae justo. Quisque ullamcorper vehicula dictum. Nullam hendrerit interdum eleifend. 
+                                Aenean luctus sed arcu laoreet scelerisque. Vivamus non ullamcorper mauris, id sagittis lorem. 
+                                Proin tincidunt mauris et dolor mattis imperdiet. Sed facilisis mattis diam elementum adipiscing. 
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-google-plus fa-stack-1x"></i>
+                                </span>
+                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                Ut ante velit, pretium non nisi a, egestas placerat diam. Nullam aliquet iaculis ultricies. 
+                                Aliquam volutpat, sapien quis volutpat elementum, ligula purus auctor diam, at vestibulum nulla augue 
+                                vel purus. Praesent ac nisl a magna tincidunt interdum sed in turpis. Maecenas nec condimentum risus. 
+                                In congue pretium est, eget euismod tortor ornare quis.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x"></i>
+                                </span>
+                                Praesent eu ultrices justo. Vestibulum ante 
+                                ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
+                                Cras mattis ipsum quis sapien consectetur fringilla. 
+                                Etiam sagittis sem tempus purus elementum, vitae pretium sapien porta. Curabitur iaculis ante ut aliquam luctus. 
+                                Vivamus ullamcorper blandit imperdiet. Ut egestas, orci id rhoncus cursus, orci risus scelerisque enim, eget mattis eros lacus quis ligula. 
+                                Vivamus ullamcorper urna eget hendrerit laoreet.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-apple fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                Morbi accumsan velit dolor. Donec convallis eleifend magna, at euismod tellus convallis a. 
+                                Curabitur in nisi dolor. Cras viverra scelerisque orci, sed interdum ligula volutpat non. 
+                                Nunc eu enim ac neque tempor feugiat. Duis posuere lacus non magna eleifend, 
+                                non dictum sem feugiat. Duis eleifend condimentum pulvinar.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class = "col-md-3 pore height-full p-1">
-            <div class="panel panel-inverse">
-                <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>  
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
-                    <h4 class="panel-title">考研</h4>
-                </div>
-                <div class="panel-body height-lg">
-                    Panel Content Here
-                </div>
-            </div>
-        </div>
-        <div class = "col-md-3 pore height-full p-1">
-            <div class="panel panel-inverse">
-                <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>  
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
-                    <h4 class="panel-title">考研</h4>
-                </div>
-                <div class="panel-body height-lg">
-                    Panel Content Here
-                </div>
-            </div>
-        </div>
+                <!-- end panel -->
+            
 
-        <div class = "col-md-3 pore height-full p-1">
-            <div class="panel panel-inverse">
-                <div class="panel-heading">
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>  
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                  <!-- begin panel -->
+                <div class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1" data-sortable-id="ui-widget-7">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">Panel with Slimscroll</h4>
                     </div>
-                    <h4 class="panel-title">考研</h4>
+                    <div class="panel-body">
+                        <div data-scrollbar="true" data-height="800px">
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed enim arcu. 
+                                Ut posuere in ligula quis ultricies. In in justo turpis. Donec ut dui at massa gravida 
+                                interdum nec vitae justo. Quisque ullamcorper vehicula dictum. Nullam hendrerit interdum eleifend. 
+                                Aenean luctus sed arcu laoreet scelerisque. Vivamus non ullamcorper mauris, id sagittis lorem. 
+                                Proin tincidunt mauris et dolor mattis imperdiet. Sed facilisis mattis diam elementum adipiscing. 
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-google-plus fa-stack-1x"></i>
+                                </span>
+                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                Ut ante velit, pretium non nisi a, egestas placerat diam. Nullam aliquet iaculis ultricies. 
+                                Aliquam volutpat, sapien quis volutpat elementum, ligula purus auctor diam, at vestibulum nulla augue 
+                                vel purus. Praesent ac nisl a magna tincidunt interdum sed in turpis. Maecenas nec condimentum risus. 
+                                In congue pretium est, eget euismod tortor ornare quis.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x"></i>
+                                </span>
+                                Praesent eu ultrices justo. Vestibulum ante 
+                                ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
+                                Cras mattis ipsum quis sapien consectetur fringilla. 
+                                Etiam sagittis sem tempus purus elementum, vitae pretium sapien porta. Curabitur iaculis ante ut aliquam luctus. 
+                                Vivamus ullamcorper blandit imperdiet. Ut egestas, orci id rhoncus cursus, orci risus scelerisque enim, eget mattis eros lacus quis ligula. 
+                                Vivamus ullamcorper urna eget hendrerit laoreet.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-apple fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                Morbi accumsan velit dolor. Donec convallis eleifend magna, at euismod tellus convallis a. 
+                                Curabitur in nisi dolor. Cras viverra scelerisque orci, sed interdum ligula volutpat non. 
+                                Nunc eu enim ac neque tempor feugiat. Duis posuere lacus non magna eleifend, 
+                                non dictum sem feugiat. Duis eleifend condimentum pulvinar.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body height-lg">
-                    Panel Content Here
+                <!-- end panel -->
+            
+
+      
+                  <!-- begin panel -->
+                <div class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1" data-sortable-id="ui-widget-7">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">Panel with Slimscroll</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div data-scrollbar="true" data-height="800px">
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed enim arcu. 
+                                Ut posuere in ligula quis ultricies. In in justo turpis. Donec ut dui at massa gravida 
+                                interdum nec vitae justo. Quisque ullamcorper vehicula dictum. Nullam hendrerit interdum eleifend. 
+                                Aenean luctus sed arcu laoreet scelerisque. Vivamus non ullamcorper mauris, id sagittis lorem. 
+                                Proin tincidunt mauris et dolor mattis imperdiet. Sed facilisis mattis diam elementum adipiscing. 
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-google-plus fa-stack-1x"></i>
+                                </span>
+                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                Ut ante velit, pretium non nisi a, egestas placerat diam. Nullam aliquet iaculis ultricies. 
+                                Aliquam volutpat, sapien quis volutpat elementum, ligula purus auctor diam, at vestibulum nulla augue 
+                                vel purus. Praesent ac nisl a magna tincidunt interdum sed in turpis. Maecenas nec condimentum risus. 
+                                In congue pretium est, eget euismod tortor ornare quis.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x"></i>
+                                </span>
+                                Praesent eu ultrices justo. Vestibulum ante 
+                                ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
+                                Cras mattis ipsum quis sapien consectetur fringilla. 
+                                Etiam sagittis sem tempus purus elementum, vitae pretium sapien porta. Curabitur iaculis ante ut aliquam luctus. 
+                                Vivamus ullamcorper blandit imperdiet. Ut egestas, orci id rhoncus cursus, orci risus scelerisque enim, eget mattis eros lacus quis ligula. 
+                                Vivamus ullamcorper urna eget hendrerit laoreet.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-apple fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                Morbi accumsan velit dolor. Donec convallis eleifend magna, at euismod tellus convallis a. 
+                                Curabitur in nisi dolor. Cras viverra scelerisque orci, sed interdum ligula volutpat non. 
+                                Nunc eu enim ac neque tempor feugiat. Duis posuere lacus non magna eleifend, 
+                                non dictum sem feugiat. Duis eleifend condimentum pulvinar.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <!-- end panel -->
+            
+
+  
+                <!-- begin panel -->
+                <div class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1" data-sortable-id="ui-widget-7">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">Panel with Slimscroll</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div data-scrollbar="true" data-height="800px">
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed enim arcu. 
+                                Ut posuere in ligula quis ultricies. In in justo turpis. Donec ut dui at massa gravida 
+                                interdum nec vitae justo. Quisque ullamcorper vehicula dictum. Nullam hendrerit interdum eleifend. 
+                                Aenean luctus sed arcu laoreet scelerisque. Vivamus non ullamcorper mauris, id sagittis lorem. 
+                                Proin tincidunt mauris et dolor mattis imperdiet. Sed facilisis mattis diam elementum adipiscing. 
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-google-plus fa-stack-1x"></i>
+                                </span>
+                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                Ut ante velit, pretium non nisi a, egestas placerat diam. Nullam aliquet iaculis ultricies. 
+                                Aliquam volutpat, sapien quis volutpat elementum, ligula purus auctor diam, at vestibulum nulla augue 
+                                vel purus. Praesent ac nisl a magna tincidunt interdum sed in turpis. Maecenas nec condimentum risus. 
+                                In congue pretium est, eget euismod tortor ornare quis.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x"></i>
+                                </span>
+                                Praesent eu ultrices justo. Vestibulum ante 
+                                ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
+                                Cras mattis ipsum quis sapien consectetur fringilla. 
+                                Etiam sagittis sem tempus purus elementum, vitae pretium sapien porta. Curabitur iaculis ante ut aliquam luctus. 
+                                Vivamus ullamcorper blandit imperdiet. Ut egestas, orci id rhoncus cursus, orci risus scelerisque enim, eget mattis eros lacus quis ligula. 
+                                Vivamus ullamcorper urna eget hendrerit laoreet.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-apple fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                Morbi accumsan velit dolor. Donec convallis eleifend magna, at euismod tellus convallis a. 
+                                Curabitur in nisi dolor. Cras viverra scelerisque orci, sed interdum ligula volutpat non. 
+                                Nunc eu enim ac neque tempor feugiat. Duis posuere lacus non magna eleifend, 
+                                non dictum sem feugiat. Duis eleifend condimentum pulvinar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end panel -->
+
+                 <!-- begin panel -->
+                <div class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1" data-sortable-id="ui-widget-7">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">Panel with Slimscroll</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div data-scrollbar="true" data-height="800px">
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed enim arcu. 
+                                Ut posuere in ligula quis ultricies. In in justo turpis. Donec ut dui at massa gravida 
+                                interdum nec vitae justo. Quisque ullamcorper vehicula dictum. Nullam hendrerit interdum eleifend. 
+                                Aenean luctus sed arcu laoreet scelerisque. Vivamus non ullamcorper mauris, id sagittis lorem. 
+                                Proin tincidunt mauris et dolor mattis imperdiet. Sed facilisis mattis diam elementum adipiscing. 
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-google-plus fa-stack-1x"></i>
+                                </span>
+                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                Ut ante velit, pretium non nisi a, egestas placerat diam. Nullam aliquet iaculis ultricies. 
+                                Aliquam volutpat, sapien quis volutpat elementum, ligula purus auctor diam, at vestibulum nulla augue 
+                                vel purus. Praesent ac nisl a magna tincidunt interdum sed in turpis. Maecenas nec condimentum risus. 
+                                In congue pretium est, eget euismod tortor ornare quis.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-left m-r-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x"></i>
+                                </span>
+                                Praesent eu ultrices justo. Vestibulum ante 
+                                ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; 
+                                Cras mattis ipsum quis sapien consectetur fringilla. 
+                                Etiam sagittis sem tempus purus elementum, vitae pretium sapien porta. Curabitur iaculis ante ut aliquam luctus. 
+                                Vivamus ullamcorper blandit imperdiet. Ut egestas, orci id rhoncus cursus, orci risus scelerisque enim, eget mattis eros lacus quis ligula. 
+                                Vivamus ullamcorper urna eget hendrerit laoreet.
+                            </p>
+                            <p>
+                                <span class="fa-stack fa-4x pull-right m-l-10 text-inverse">
+                                    <i class="fa fa-square-o fa-stack-2x"></i>
+                                    <i class="fa fa-apple fa-stack-1x"></i>
+                                </span>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                                Morbi accumsan velit dolor. Donec convallis eleifend magna, at euismod tellus convallis a. 
+                                Curabitur in nisi dolor. Cras viverra scelerisque orci, sed interdum ligula volutpat non. 
+                                Nunc eu enim ac neque tempor feugiat. Duis posuere lacus non magna eleifend, 
+                                non dictum sem feugiat. Duis eleifend condimentum pulvinar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end panel -->
+            
+
         </div>
-        </div>
+        <!-- end monitor content-->
     </div>
+</div>
    
     
     <!-- <div class = "overflow-x-auto overflow-y-hidden width-lg height-lg pore">
@@ -271,6 +519,4 @@
                 </div>
             </div>
         </div> -->
-    </div>
-</div>
 <!-- end #content -->

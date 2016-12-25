@@ -1,6 +1,6 @@
 "use strict";
 CQ.mainApp.dashboardController
-	.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
+    .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('dashboard', {
                 url: "/dashboard",
