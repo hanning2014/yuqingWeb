@@ -1,7 +1,7 @@
 "use strict";
-CQ.mainApp.monitorController
-   .controller("monitorController", ["$rootScope", "$scope", function ($rootScope, $scope) {
-        console.log("monitorController", "start!!!");
+CQ.mainApp.systemsettingController
+    .controller("roleSettingController", ["$rootScope", "$scope", function ($rootScope, $scope) {
+        console.log("roleSettingController", "start!!!");
         //页面UI初始化；
         $scope.$on('$viewContentLoaded', function() {
             if($rootScope.mainController) {

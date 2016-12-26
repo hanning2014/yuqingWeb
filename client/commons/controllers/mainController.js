@@ -1,6 +1,6 @@
 "use strict";
 CQ.mainApp.frameController
-	.controller('mainController', ['$scope', '$rootScope', '$state', 
+	.controller('mainController', ['$scope', '$rootScope', '$state',
 		function($scope, $rootScope, $state) {
 		console.log("mainController", "start!");
 		$rootScope.mainController = false;
@@ -11,6 +11,7 @@ CQ.mainApp.frameController
 					App.init();
 					//Dashboard.init();
 					$rootScope.mainController = true;
+					$scope.$broadcast('uirun', "uirun");
 					console.log("UI框架初始化完成");
 			}
         });
@@ -20,9 +21,47 @@ CQ.mainApp.frameController
 			$rootScope.headerController = true;
 			console.log("headerController", "start!");
 	}])
-	.controller('leftbarController', ['$scope', '$rootScope', '$state', 
-		function($scope, $rootScope, $state) {
+	.controller('leftbarController', ['$scope', '$rootScope', '$state','DataSourceTree', 
+		function($scope, $rootScope, $state, DataSourceTree) {
+			//console.log(DataSourceTree.allLinks);
+			var lists = [];
+			$scope.allLinks = DataSourceTree.allLinks;
 			$rootScope.leftbarController = true;
+			$scope.moduleHomelinkclick = function(item) {
+				$scope.allLinks.forEach(function(d) {
+					d.isActive = "";
+					if(d.items != "") {
+						d.items.forEach(function(d1) {
+							d1.isActive = "";
+							if(d1.items != ""){
+								d1.items.forEach(function(d2) {
+									d2.isActive = "";
+								});
+							}
+						});
+					}
+				});
+				$scope.allLinks.forEach(function(d) {
+					if(item.label == d.label) {
+						d.isActive = "active";
+					}
+					if(d.items != "") {
+						d.items.forEach(function(d1) {
+							if(item.label == d1.label) {
+								d1.isActive = "active";
+							}
+							if(d1.items != ""){
+								d1.items.forEach(function(d2) {
+									if(item.label == d2.label) {
+										d2.isActive = "active";
+									}
+								});
+							}
+						});
+					}
+				});
+				//console.log(item);
+			};
 			console.log("leftbarController", "start!"); 
 	}])
 	.controller('themeController', ['$scope', '$rootScope', '$state', 

@@ -1,5 +1,5 @@
 "use strict";
-CQ.mainApp.frameServices
+angular.module("commons",[])
     .factory('http-auth-interceptor', function ($q, $rootScope) {
         return {
             responseError: function (response) {

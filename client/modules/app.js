@@ -1,7 +1,7 @@
 "use strict";
 CQ.mainApp = {
     frameController:         angular.module("frame.controller", []),
-    frameServices:           angular.module("frame.services", []),
+    frameServices:           angular.module("frame.services", ['commons']),
     dashboardController:     angular.module("dashboard.Controller", []),
     topicController:         angular.module("topic.Controller", []),
     monitorController:       angular.module("monitor.Controller", []),
@@ -15,7 +15,11 @@ angular.module('mainApp', [
     "frame.controller",
     "frame.services",
     "dashboard.Controller",
-    "monitor.Controller"
+    "monitor.Controller",
+    "topic.Controller",
+    "senmessage.Controller",
+    "systemsetting.Controller",
+    "search.Controller"
     ])
     .config(["$stateProvider", "$urlRouterProvider", "$locationProvider", "$httpProvider",
         function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
