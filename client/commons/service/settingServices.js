@@ -1,5 +1,5 @@
 "use strict";
-angular.module("commons",[])
+angular.module('settingservice',[])
     .factory("DataSourceTree",function($rootScope) {
         var factories = {};
         var dashboard = [

@@ -1,8 +1,8 @@
 "use strict";
 CQ.mainApp = {
-    frameController:         angular.module("frame.controller", []),
-    frameServices:           angular.module("frame.services", ['commons']),
-    dashboardController:     angular.module("dashboard.Controller", []),
+    frameController:         angular.module("frame.controller", ["settingservice"]),
+    frameServices:           angular.module("frame.services", ["commons"]),
+    dashboardController:     angular.module("dashboard.Controller", ["dashboardService"]),
     topicController:         angular.module("topic.Controller", []),
     monitorController:       angular.module("monitor.Controller", []),
     senmessageController:    angular.module("senmessage.Controller", []),
@@ -11,6 +11,7 @@ CQ.mainApp = {
 };
 angular.module('mainApp', [
     "ui.router",
+    "ngResource",
     "ui.bootstrap",
     "frame.controller",
     "frame.services",

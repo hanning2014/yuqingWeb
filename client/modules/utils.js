@@ -12,7 +12,7 @@ CQ.variable = {
     USER_PRIVILEGES_DEPTS: "",
     USERNAME_ADMIN: "admin",
     APIKEY: "309dea40e47f447ca83efb6407cea0c9",
-    RESTFUL_URL: ""
+    RESTFUL_URL: "http://117.36.50.61:30009/bi/v1/"
 };
 CQ.variables = {};
 CQ.variables.CURRENT_USER = "";

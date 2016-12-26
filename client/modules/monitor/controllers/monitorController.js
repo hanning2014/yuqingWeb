@@ -10,4 +10,5 @@ CQ.mainApp.monitorController
             }
         });
         
+        
    }]);

@@ -1,5 +1,5 @@
 "use strict";
-angular.module("commons",[])
+angular.module('commons',[])
     .factory('http-auth-interceptor', function ($q, $rootScope) {
         return {
             responseError: function (response) {
@@ -34,7 +34,7 @@ angular.module("commons",[])
             }
         };
     }])
-    .factory("parseResoyrce", ["$rootScope", function($rootScope) {
+    .factory("parseResource", ["$rootScope", function($rootScope) {
         var self = {},
         headers = {
             "Content-Type": "application/json",
