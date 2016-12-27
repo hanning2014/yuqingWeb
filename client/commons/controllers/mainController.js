@@ -14,7 +14,7 @@ CQ.mainApp.frameController
 					$scope.$broadcast('uirun', "uirun");
 					console.log("UI框架初始化完成");
 			}
-        });
+		});
 	}])
 	.controller('headerController', ['$scope', '$rootScope', '$state', 
 		function($scope, $rootScope, $state) {

@@ -13,4 +13,3 @@ angular.module('dashboardService',['commons'])
         };
         return factories;
     }]);
-    

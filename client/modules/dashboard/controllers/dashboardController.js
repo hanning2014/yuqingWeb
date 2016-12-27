@@ -24,4 +24,4 @@ CQ.mainApp.dashboardController
                 console.log(error);
             });
 
-	}]);
+    }]);
