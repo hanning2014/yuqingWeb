@@ -36,83 +36,45 @@
         border-radius: 100%;
         animation: rotation .6s infinite linear;
     }
-
+    .h-800 {
+        height: 800px;
+    }
+    .ico-action {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
 </style>
 <!-- begin #content -->
 <div id = "content" class = "content">
     <div id="topics" class="m-b-5 col-md-12 bg-silver animated">
-        <div class="btn-group m-r-5 m-b-5 m-t-5 " id = "monitortopic_1">
-            <a href="javascript:;" ng-click = "movePosition('topic_1')" class="btn btn-primary btn-lg">考研答案</a>
+        <div class="btn-group m-r-5 m-b-5 m-t-5 "  ng-repeat = "(index, items) in monitorData" id = "monitortopic_{{items.topic_id}}">
+            <a href="javascript:;" ng-click = "movePosition(items.topic_id)" class="btn btn-primary btn-lg">{{items.topic_nm}}</a>
             <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu pull-right f-s-14">
-                <li><a href="javascript:;" ng-click = "pauseTop('topic_1','monitortopic_1')" class = "stop">暂停</a></li>
-                <li><a href="javascript:;" ng-click = "startTop('topic_1','monitortopic_1')" class = "hidden start">启动</a></li>
-                <li><a href="javascript:;" ng-click = "openDia('topic_1')" >修改关键词</a></li>
-            </ul>
-        </div>
-        <div class="btn-group m-r-5 m-b-5 m-t-5" id = "monitortopic_2">
-            <a href="javascript:;" ng-click = "movePosition('topic_2')" class="btn btn-primary btn-lg">作弊</a>
-            <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu pull-right f-s-14">
-                <li><a href="javascript:;" ng-click = "pauseTop('topic_2','monitortopic_2')" class = "stop">暂停</a></li>
-                <li><a href="javascript:;" ng-click = "startTop('topic_2','monitortopic_2')" class = "hidden start">启动</a></li>
-                <li><a href="javascript:;" ng-click = "openDia('topic_2')" >修改关键词</a></li>
-            </ul>
-        </div>
-        <div class="btn-group m-r-5 m-b-5 m-t-5" id = "monitortopic_3">
-            <a href="javascript:;" ng-click = "movePosition('topic_3')" class="btn btn-primary btn-lg">考研政治</a>
-            <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu pull-right f-s-14">
-                <li><a href="javascript:;" ng-click = "pauseTop('topic_3','monitortopic_3')" class = "stop">暂停</a></li>
-                <li><a href="javascript:;" ng-click = "startTop('topic_3','monitortopic_3')" class = "hidden start">启动</a></li>
-                <li><a href="javascript:;" ng-click = "openDia('topic_3')" >修改关键词</a></li>
-            </ul>
-        </div>
-         <div class="btn-group m-r-5 m-b-5 m-t-5" id = "monitortopic_4">
-            <a href="javascript:;" ng-click = "movePosition('topic_4')" class="btn btn-primary btn-lg">考研数学</a>
-            <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu pull-right f-s-14">
-                <li><a href="javascript:;" ng-click = "pauseTop('topic_4','monitortopic_4')" class = "stop">暂停</a></li>
-                <li><a href="javascript:;" ng-click = "startTop('topic_4','monitortopic_4')" class = "hidden start">启动</a></li>
-                <li><a href="javascript:;" ng-click = "openDia('topic_4')" >修改关键词</a></li>
-            </ul>
-        </div>
-         <div class="btn-group m-r-5 m-b-5 m-t-5" id = "monitortopic_5">
-            <a href="javascript:;" ng-click = "movePosition('topic_5')" class="btn btn-primary btn-lg">考研英语</a>
-            <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu pull-right f-s-14">
-                <li><a href="javascript:;" ng-click = "pauseTop('topic_5','monitortopic_5')" class = "stop">暂停</a></li>
-                <li><a href="javascript:;" ng-click = "startTop('topic_5','monitortopic_5')" class = "hidden start">启动</a></li>
-                <li><a href="javascript:;" ng-click = "openDia('topic_5')" >修改关键词</a></li>
+                <li><a href="javascript:;" ng-click = "pauseTop(items.topic_id)" class = "stop">暂停</a></li>
+                <li><a href="javascript:;" ng-click = "startTop(items.topic_id)" class = "hidden start">启动</a></li>
+                <li><a href="javascript:;" ng-click = "openDia(items.topic_id , items.topic_nm)" >修改关键词</a></li>
             </ul>
         </div>
     </div>
+    <!--end topic lists-->
     <div class="row">
         <!-- begin moitor content-->
         <div class = "col-md-12 bg-black-lighter animated fadeInUp" id = "topicLists">
-                  <!-- begin panel -->
-                <div id = "topic_1" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 topics" data-sortable-id="ui-widget-7">
+            <!-- begin panel -->
+                <div ng-repeat = "(index, items) in monitorData" id = "topic_{{items.topic_id}}" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 topics" data-sortable-id="ui-widget-7" >
                     <div class="panel-heading">
                         <div class="panel-heading-btn">
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
                             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                         </div>
-                        <h4 class="panel-title">考研答案</h4>
+                        <h4 class="panel-title">{{items.topic_nm}}</h4>
                     </div>
                     <div class="panel-body">
-                        <div data-scrollbar="true" data-height="800px">
+                        <div  class = "h-800 overflow-y-scroll">
                             <ul class="media-list media-list-with-divider">
                                 <div class = "width-full m-t-20 hidden loads">
                                     <p class = "text-center">
@@ -120,76 +82,30 @@
                                         </i>
                                     </p>
                                 </div>
-                                <li class="media media-sm">
-                                    <a href="javascript:;" class="pull-left">
-                                        <img src="/static/assets/img/user-1.jpg" alt="" class="media-object rounded-corner">
-                                    </a>
+                                <li class="media media-sm" ng-repeat = "(ii, it) in items.posts" ng-if = "ii < 20">
+                                    <!-- <a href="javascript:;" class="pull-left">
+                                        <img ng-src="it.poster_imgurl" ng-if = " it.poster_imgurl != ''
+                                        class="media-object" rounded-corner">
+                                        <img src="/static/assets/img/people.svg" ng-if = "it.poster_imgurl == ''" class="media-object rounded-corner">
+                                    </a> -->
                                     <div class="media-body">
-                                        <a href="javascript:;"><h4 class="media-heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4></a>
-                                        <p class="m-b-5">
-                                            Aenean mollis arcu sed turpis accumsan dignissim. Etiam vel tortor at risus tristique convallis. Donec adipiscing euismod arcu id euismod. Suspendisse potenti. Aliquam lacinia sapien ac urna placerat, eu interdum mauris viverra.
+                                        <a ng-href = "{{it.url}}" target="_blank"><h4 class="media-heading">{{it.title}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4></a>
+                                        <p class="m-b-5" ng-if = "it.content">
+                                            {{it.content}}
                                         </p>
-                                        <i class="text-muted">Received on 04/16/2013, 12.39pm</i>
-                                    </div>
-                                </li>
-                                <li class="media media-sm">
-                                    <a href="javascript:;" class="pull-left">
-                                        <img src="/static/assets/img/user-2.jpg" alt="" class="media-object rounded-corner">
-                                    </a>
-                                    <div class="media-body">
-                                        <a href="javascript:;"><h4 class="media-heading">Praesent et sem porta leo tempus tincidunt eleifend et arcu.</h4></a>
-                                        <p class="m-b-5">
-                                            Proin adipiscing dui nulla. Duis pharetra vel sem ac adipiscing. Vestibulum ut porta leo. Pellentesque orci neque, tempor ornare purus nec, fringilla venenatis elit. Duis at est non nisl dapibus lacinia.
-                                        </p>
-                                        <i class="text-muted">Received on 04/16/2013, 12.39pm</i>
-                                    </div>
-                                </li>
-                                <li class="media media-sm">
-                                    <a href="javascript:;" class="pull-left">
-                                        <img src="/static/assets/img/user-3.jpg" alt="" class="media-object rounded-corner">
-                                    </a>
-                                    <div class="media-body">
-                                        <a href="javascript:;"><h4 class="media-heading">Ut mi eros, varius nec mi vel, consectetur convallis diam.</h4></a>
-                                        <p class="m-b-5">
-                                            Ut mi eros, varius nec mi vel, consectetur convallis diam. Nullam eget hendrerit eros. Duis lacinia condimentum justo at ultrices. Phasellus sapien arcu, fringilla eu pulvinar id, mattis quis mauris.
-                                        </p>
-                                        <i class="text-muted">Received on 04/16/2013, 12.39pm</i>
-                                    </div>
-                                </li>
-                                <li class="media media-sm">
-                                    <a href="javascript:;" class="pull-left">
-                                        <img src="/static/assets/img/user-4.jpg" alt="" class="media-object rounded-corner">
-                                    </a>
-                                    <div class="media-body">
-                                        <a href="javascript:;"><h4 class="media-heading">Aliquam nec dolor vel nisl dictum ullamcorper.</h4></a>
-                                        <p class="m-b-5">
-                                            Aliquam nec dolor vel nisl dictum ullamcorper. Duis vel magna enim. Aenean volutpat a dui vitae pulvinar. Nullam ligula mauris, dictum eu ullamcorper quis, lacinia nec mauris.
-                                        </p>
-                                        <i class="text-muted">Received on 04/16/2013, 12.39pm</i>
-                                    </div>
-                                </li>
-                                <li class="media media-sm">
-                                    <a href="javascript:;" class="pull-left">
-                                        <img src="/static/assets/img/user-4.jpg" alt="" class="media-object rounded-corner">
-                                    </a>
-                                    <div class="media-body">
-                                        <a href="javascript:;"><h4 class="media-heading">Aliquam nec dolor vel nisl dictum ullamcorper.</h4></a>
-                                        <p class="m-b-5">
-                                            Aliquam nec dolor vel nisl dictum ullamcorper. Duis vel magna enim. Aenean volutpat a dui vitae pulvinar. Nullam ligula mauris, dictum eu ullamcorper quis, lacinia nec mauris.
-                                        </p>
-                                        <i class="text-muted">Received on 04/16/2013, 12.39pm</i>
-                                    </div>
-                                </li>
-                                <li class="media media-sm">
-                                    <a href="javascript:;" class="pull-left">
-                                        <img src="/static/assets/img/user-4.jpg" alt="" class="media-object rounded-corner">
-                                    </a>
-                                    <div class="media-body">
-                                        <a href="javascript:;"><h4 class="media-heading">Aliquam nec dolor vel nisl dictum ullamcorper.</h4></a>
-                                        <p class="m-b-5">
-                                            Aliquam nec dolor vel nisl dictum ullamcorper. Duis vel magna enim. Aenean volutpat a dui vitae pulvinar. Nullam ligula mauris, dictum eu ullamcorper quis, lacinia nec mauris.
-                                        </p>
-                                        <i class="text-muted">Received on 04/16/2013, 12.39pm</i>
+                                        <i class="text-muted">{{it.pt_time}}, {{it.board}}</i>
+                                        <div class = "pull-right p-t-10 p-r-5 width-full f-s-14 text-right ">
+                                            <a title = "帖子分析"
+                                            ng-click = "OpenAnaly('analy_1',items.topic_id)">
+                                            <img src = "/static/assets/img/analy.svg">
+                                            </a>
+                                            <a class = "addsen" title = "添加敏感信息" ng-click = "AddSenmessage('post_id')">
+                                                <img src = "/static/assets/img/add.svg">
+                                            </a>
+                                            <a class = "save" title = "标记为已读" ng-click = "MarkRead(this)">
+                                                <img src = "/static/assets/img/save.svg">
+                                            </a>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
@@ -197,88 +113,48 @@
                     </div>
                 </div>
                 <!-- end panel -->
-            
-
                 <!-- begin panel -->
-                <div id = "topic_2" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 topics" data-sortable-id="ui-widget-7">
+                <div id = "analy_1" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 analy hidden animate fadeIn" data-sortable-id="ui-widget-7">
                     <div class="panel-heading">
                         <div class="panel-heading-btn">
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" ng-click = "stopAnaly('analy_1')"><i class="fa fa-times"></i></a>
                         </div>
-                        <h4 class="panel-title">作弊</h4>
+                        <h4 class="panel-title">话题分析</h4>
                     </div>
                     <div class="panel-body">
                         <div data-scrollbar="true" data-height="800px">
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- end panel -->
-            
+                            <div class = "width-full height-sm m-b-20">
+                                <h4>帖子时序分析</h4>
+                                <div class = "" id = "timeAna">
 
-      
-                  <!-- begin panel -->
-                <div id = "topic_3" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 topics" data-sortable-id="ui-widget-7">
-                    <div class="panel-heading">
-                        <div class="panel-heading-btn">
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                        </div>
-                        <h4 class="panel-title">考研政治</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div data-scrollbar="true" data-height="800px">
-                           
-                        </div>
-                    </div>
-                </div>
-                <!-- end panel -->
-            
+                                </div>
+                            </div>
+                            <hr>
+                            <div class = "width-full height-sm">
+                                <h4>博主分析</h4>
+                                <div id = "posterAna">
 
-  
-                <!-- begin panel -->
-                <div id = "topic_4" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 topics" data-sortable-id="ui-widget-7">
-                    <div class="panel-heading">
-                        <div class="panel-heading-btn">
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                        </div>
-                        <h4 class="panel-title">考研数学</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div data-scrollbar="true" data-height="800px">
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- end panel -->
+                                </div>
+                            </div>
+                             <hr>
+                            <div class = "width-full height-sm">
+                                <h4>传播路径分析</h4>
+                                <div id = "broadcastAna">
 
-                 <!-- begin panel -->
-                <div id = "topic_5" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 topics" data-sortable-id="ui-widget-7">
-                    <div class="panel-heading">
-                        <div class="panel-heading-btn">
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                        </div>
-                        <h4 class="panel-title">考研英语</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div data-scrollbar="true" data-height="800px">
-                           
+                                </div>
+                            </div>
+                             <hr>
+                            <div class = "width-full height-sm">
+                                <h4>关键词云分析</h4>
+                                <div id = "keywordsAna">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
                 <!-- end panel -->
-        </div>
         <!-- end monitor content-->
     </div>
 </div>

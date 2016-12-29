@@ -4,7 +4,7 @@ CQ.mainApp = {
     frameServices:           angular.module("frame.services", ["commons","Notice"]),
     dashboardController:     angular.module("dashboard.Controller", ["dashboardService"]),
     topicController:         angular.module("topic.Controller", []),
-    monitorController:       angular.module("monitor.Controller", []),
+    monitorController:       angular.module("monitor.Controller", ["monitorService"]),
     senmessageController:    angular.module("senmessage.Controller", []),
     systemsettingController: angular.module("systemsetting.Controller", []),
     searchController:        angular.module("search.Controller", [])
