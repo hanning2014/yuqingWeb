@@ -26,23 +26,22 @@ CQ.mainApp.monitorController
             MonitorFacService.getMonitorData(cons).then(function(res){
                 console.log(res);
                 $scope.monitorData = res;
-
             },function(error){
                 console.log(error);
             });
         }
-        $scope.post = '<li class="media media-sm">'+
-                        '<a href="javascript:;" class="pull-left">' +
-                            '<img src="/static/assets/img/user-1.jpg" alt="" class="media-object rounded-corner">'+
-                        '</a>'+
-                        '<div class="media-body">'+
-                            '<a href="javascript:;"><h4 class="media-heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4></a>'+
-                            '<p class="m-b-5">'+
-                                'Aenean mollis arcu sed turpis accumsan dignissim. Etiam vel tortor at risus tristique convallis. Donec adipiscing euismod arcu id euismod. Suspendisse potenti. Aliquam lacinia sapien ac urna placerat, eu interdum mauris viverra.'+
-                            '</p>'+
-                            '<i class="text-muted">Received on 04/16/2013, 12.39pm</i>'+
-                        '</div>'+
-                     '</li>';
+        // $scope.post = '<li class="media media-sm">'+
+        //                 '<a href="javascript:;" class="pull-left">' +
+        //                     '<img src="/static/assets/img/user-1.jpg" alt="" class="media-object rounded-corner">'+
+        //                 '</a>'+
+        //                 '<div class="media-body">'+
+        //                     '<a href="javascript:;"><h4 class="media-heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4></a>'+
+        //                     '<p class="m-b-5">'+
+        //                         'Aenean mollis arcu sed turpis accumsan dignissim. Etiam vel tortor at risus tristique convallis. Donec adipiscing euismod arcu id euismod. Suspendisse potenti. Aliquam lacinia sapien ac urna placerat, eu interdum mauris viverra.'+
+        //                     '</p>'+
+        //                     '<i class="text-muted">Received on 04/16/2013, 12.39pm</i>'+
+        //                 '</div>'+
+        //              '</li>';
         // $interval(function(){
         //     console.log($(".panel"));
         //     for(var i = 0; i < $(".panel").length; i ++) {
@@ -76,6 +75,17 @@ CQ.mainApp.monitorController
                 scope:$scope
             }
             );
+        };
+        $scope.refreshData = function(topic_id) {
+            var doms = "#topic_" + topic_id;
+            angular.element(doms).find(".loads").removeClass("hidden");
+            $interval(function(){
+                angular.element(doms).find(".loads").addClass("hidden");
+            }, 5000);
+        };
+        $scope.panelCollapse = function(topic_id) {
+            var doms = "#topic_" + topic_id;
+            angular.element(doms).find(".panel-body").slideToggle();
         };
         $scope.pauseTop = function(topic_id) {
             $scope.topic_id = "topic_" + topic_id;
@@ -118,11 +128,11 @@ CQ.mainApp.monitorController
             // $("#"+post_id+"").find(".save").prepend("<img src = '/static/assets/img/saved.svg'>");
         };
         $scope.OpenAnaly = function(analy_topic, topic_id) {
-            //if($("#"+analy_topic+"").hasClass())
-            //$("#"+analy_topic+"").hide("slow");
-            $("#topic_"+topic_id+"").insertBefore($("#"+analy_topic));
-            $("#"+analy_topic+"").removeClass("hidden").show();
-            var width = $("#"+analy_topic+"").width();
+            var anaDom = "#" + analy_topic;
+            var topicDom = "#topic_" + topic_id;
+            angular.element(topicDom).after(angular.element(anaDom));
+            angular.element(anaDom).removeClass("hidden").show("normal");
+            var width = angular.element(topicDom).width();
             // time 
             var timeAna = c3.generate({
                 bindto:"#timeAna",
@@ -137,12 +147,9 @@ CQ.mainApp.monitorController
                 },
                 data: {
                     x: 'x',
-            //        xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
                     columns: [
                         ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05'],
-            //            ['x', '20130101', '20130102', '20130103', '20130104', '20130105', '20130106'],
-                        ['时间', 30, 200, 100, 400, 150],
-                      
+                        ['时间', 30, 200, 100, 400, 150]
                     ]
                 },
                 axis: {
@@ -154,10 +161,10 @@ CQ.mainApp.monitorController
                     }
                 }
             });
-        $scope.stopAnaly = function(analy_topic) {
-            $("#"+analy_topic+"").hide("slow");
         };
-
+        $scope.stopAnaly = function(analy_topic) {
+            var anaDom = "#" + analy_topic;
+            angular.element(anaDom).hide("slow");
         };
 
    }])
