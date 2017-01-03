@@ -19,13 +19,12 @@ CQ.mainApp.monitorController
             var cons = {};
             cons.dataType = -1;
             cons.siteId = -1;
-            cons.date = "2016-12-29";
-            cons.time = -1;
+            cons.date = "2016-12-30";
             cons.pageNum = 1;
             cons.pageCount = 20;
             MonitorFacService.getMonitorData(cons).then(function(res){
                 console.log(res);
-                $scope.monitorData = res;
+                $scope.monitorData = res.topic;
             },function(error){
                 console.log(error);
             });
@@ -83,6 +82,11 @@ CQ.mainApp.monitorController
                 angular.element(doms).find(".loads").addClass("hidden");
             }, 5000);
         };
+
+        $scope.showMore = function() {
+            console.log('show more triggered');  
+        };
+
         $scope.panelCollapse = function(topic_id) {
             var doms = "#topic_" + topic_id;
             angular.element(doms).find(".panel-body").slideToggle();

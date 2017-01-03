@@ -48,15 +48,15 @@
 <!-- begin #content -->
 <div id = "content" class = "content">
     <div id="topics" class="m-b-5 col-md-12 bg-silver">
-        <div class="btn-group m-r-5 m-b-5 m-t-5 "  ng-repeat = "(index, items) in monitorData" id = "monitortopic_{{items.topic_id}}">
-            <a href="javascript:;" ng-click = "movePosition(items.topic_id)" class="btn btn-primary btn-lg">{{items.topic_nm}}</a>
+        <div class="btn-group m-r-5 m-b-5 m-t-5 "  ng-repeat = "(index, items) in monitorData" id = "monitortopic_{{items.topicId}}">
+            <a href="javascript:;" ng-click = "movePosition(items.topicId)" class="btn btn-primary btn-lg">{{items.topicName}}</a>
             <a href="javascript:;" data-toggle="dropdown" class="btn btn-primary btn-lg dropdown-toggle" aria-expanded="false">
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu pull-right f-s-14">
-                <li><a href="javascript:;" ng-click = "pauseTop(items.topic_id)" class = "stop">暂停</a></li>
-                <li><a href="javascript:;" ng-click = "startTop(items.topic_id)" class = "hidden start">启动</a></li>
-                <li><a href="javascript:;" ng-click = "openDia(items.topic_id , items.topic_nm)" >修改关键词</a></li>
+                <li><a href="javascript:;" ng-click = "pauseTop(items.topicId)" class = "stop">暂停</a></li>
+                <li><a href="javascript:;" ng-click = "startTop(items.topicId)" class = "hidden start">启动</a></li>
+                <li><a href="javascript:;" ng-click = "openDia(items.topicId , items.topicName)" >修改关键词</a></li>
             </ul>
         </div>
     </div>
@@ -65,24 +65,24 @@
         <!-- begin moitor content-->
         <div class = "col-md-12 bg-black-lighter" id = "topicLists">
             <!-- begin panel -->
-                <div ng-repeat = "(index, items) in monitorData" id = "topic_{{items.topic_id}}" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 topics" data-sortable-id="ui-widget-{{items.topic_id}}" >
+                <div ng-repeat = "(index, items) in monitorData" id = "topic_{{items.topicId}}" class="panel panel-inverse col-md-3 p-r-0 p-l-0 b-r-1 topics" data-sortable-id="ui-widget-{{items.topicId}}" >
                     <div class="panel-heading">
                         <div class="panel-heading-btn">
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" ng-click = "refreshData(items.topic_id)"><i class="fa fa-repeat"></i></a>
-                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" ng-click="panelCollapse(items.topic_id)"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" ng-click = "refreshData(items.topicId)"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" ng-click="panelCollapse(items.topicId)"><i class="fa fa-minus"></i></a>
                         </div>
-                        <h4 class="panel-title">{{items.topic_nm}}</h4>
+                        <h4 class="panel-title">{{items.topicName}}</h4>
                     </div>
                     <div class="panel-body">
-                        <div  class = "h-800 overflow-y-scroll">
-                            <ul class="media-list media-list-with-divider">
+                        <div  class = "">
+                            <ul class="media-list media-list-with-divider overflow-y-scroll h-800" scrolly="showMore()">
                                 <div class = "width-full m-t-20 hidden loads">
                                     <p class = "text-center">
                                         <i class = "fa post_loading">
                                         </i>
                                     </p>
                                 </div>
-                                <li class="media media-sm" ng-repeat = "(ii, it) in items.posts" ng-if = "ii < 20">
+                                <li class="media media-sm" ng-repeat = "(ii, it) in items.postData">
                                     <!-- <a href="javascript:;" class="pull-left">
                                         <img ng-src="it.poster_imgurl" ng-if = " it.poster_imgurl != ''
                                         class="media-object" rounded-corner">
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class = "pull-right p-t-10 p-r-5 width-full f-s-14 text-right ">
                                             <a title = "帖子分析"
-                                            ng-click = "OpenAnaly('analy_1',items.topic_id)">
+                                            ng-click = "OpenAnaly('analy_1',items.topicId)">
                                             <img src = "/static/assets/img/analy.svg">
                                             </a>
                                             <a class = "addsen" title = "添加敏感信息" ng-click = "AddSenmessage('post_id')">
