@@ -1,8 +1,12 @@
 "use strict";
 CQ.mainApp.monitorController
    .controller("monitorController", ["$rootScope", "$scope", "$interval", "ngDialog","MonitorFacService",
-    function ($rootScope, $scope, $interval,ngDialog, MonitorFacService) {
+    "$location","$stateParams",function ($rootScope, $scope, $interval,ngDialog, MonitorFacService, 
+        $location, $stateParams) {
         console.log("monitorController", "start!!!");
+        console.log($location.path());
+        console.log($stateParams.dataType);
+        console.log($stateParams.siteId);
         //页面UI初始化；
         $scope.topic_id = null;
         $scope.monitortopic_id = null;

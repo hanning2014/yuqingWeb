@@ -1,4 +1,4 @@
-begin #sidebar -->
+
 <div id="sidebar" class="sidebar">
 	<!-- begin sidebar scrollbar -->
 	<div data-scrollbar="true" data-height="100%">
@@ -31,7 +31,7 @@ begin #sidebar -->
 						<span ng-bind = "item.label"></span>
 						</a>
 						<ul class = "sub-menu">
-							<li sclass = "has-sub" ng-repeat = "(index2,itt) in item.items">
+							<li class = "has-sub" ng-repeat = "(index2,itt) in item.items">
 								<a href = "{{itt.link}}" ng-if = "itt.link">
 								<b class="caret pull-right" ng-if = 'itt.items'></b>
 								<i class="{{itt.icon}}"></i>
@@ -44,131 +44,6 @@ begin #sidebar -->
 			</li>
 			<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
 		</ul>
-	<!-- 	<ul class="nav">
-			<li class="has-sub active">
-				<a ng-href="#/dashboard">
-				    <b class="caret pull-right"></b>
-				    <i class="fa fa-dashboard"></i>
-				    <span>面板</span>
-			    </a>
-				<ul class="sub-menu">
-				    <li class="active"><a ng-href="#/dashboard">面板统计</a></li>
-				
-				</ul>
-			</li>
-			<li class="has-sub">
-				<a href="javascript:;">
-					<b class="caret pull-right"></b>
-					<i class="fa fa-bar-chart-o"></i> 
-					<span>话题分析</span>
-				</a>
-				<ul class="sub-menu">
-				    <li><a href="">敏感话题</a></li>
-				    <li><a href="">热点话题</a></li>
-				    <li><a href="">预留</a></li>
-				</ul>
-			</li>
-			<li class="has-sub">
-				<a ng-href = "#/monitor">
-				    <b class="caret pull-right"></b>
-				    <i class="fa fa-eye"></i>
-				    <span>实时监控</span> 
-				</a>
-				<ul class="sub-menu">
-					<li><a ng-href = "#/monitor">全部数据源</a></li>
-					<li class="has-sub">
-						<a>
-							<b class="caret pull-right"></b>
-						新闻类
-						</a>
-						<ul class = "sub-menu">
-							<li><a href="javascript:;">网易新闻</a></li>
-							<li><a href="javascript:;">新浪新闻</a></li>
-						</ul>
-					</li>
-					<li class="has-sub">
-						<a>
-							<b class="caret pull-right"></b>
-						论坛类
-						</a>
-						<ul class = "sub-menu">
-							<li><a href="javascript:;">天涯社区</a></li>
-							<li><a href="javascript:;">新浪教育</a></li>
-						</ul>
-					</li>
-					<li class="has-sub">
-						<a>
-							<b class="caret pull-right"></b>
-						微博类
-						</a>
-						<ul class = "sub-menu">
-							<li><a href="javascript:;">新浪微博</a></li>
-						</ul>
-					</li>
-					<li class="has-sub">
-						<a>
-							<b class="caret pull-right"></b>
-						贴吧类
-						</a>
-						<ul class = "sub-menu">
-							<li><a href="javascript:;">高考吧</a></li>
-							<li><a href="javascript:;">考研吧</a></li>
-						</ul>
-					</li>
-					<li><a href="">微信类</a></li>
-					<li class="has-sub">
-						<a>
-							<b class="caret pull-right"></b>
-						全网搜索
-						</a>
-						<ul class = "sub-menu">
-							<li><a href="javascript:;">百度搜索</a></li>
-							<li><a href="javascript:;">搜狗搜索</a></li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-			<li class="has-sub">
-				<a href="javascript:;">
-					<b class="caret pull-right"></b>
-					<i class="fa fa-table"></i> 
-					<span>敏感信息</span>
-				</a>
-				<ul class="sub-menu">
-				    <li><a href="">人为敏感</a></li>
-				    <li><a href="">系统推荐</a></li>
-				    <li><a href="">预留</a></li>
-				</ul>
-			</li>
-			<li class="has-sub">
-				<a href="javascript:;">
-					<b class="caret pull-right"></b>
-					<i class="fa fa-gear"></i> 
-					<span>系统设置</span>
-				</a>
-				<ul class="sub-menu">
-				    <li><a href="">用户设置</a></li>
-				    <li><a href="">角色设置</a></li>
-				    <li><a href="">预留</a></li>
-				</ul>
-			</li>
-			<li class="has-sub">
-				<a href="javascript:;">
-					<b class="caret pull-right"></b>
-					<i class="fa fa-search"></i> 
-					<span>舆情检索</span>
-				</a>
-				<ul class="sub-menu">
-				    <li><a href="">舆情趋势</a></li>
-				    <li><a href="">关联分析</a></li>
-				
-				</ul>
-			</li>
-	        <!-- begin sidebar minify button -->
-			<!-- <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li> -->
-	        <!-- end sidebar minify button -->
-		<!-- </ul> -->
-		<!-- end sidebar nav -->
 	</div>
 	<!-- end sidebar scrollbar -->
 </div>

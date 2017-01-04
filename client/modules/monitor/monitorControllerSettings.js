@@ -3,7 +3,7 @@ CQ.mainApp.monitorController
     .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
         $stateProvider
             .state("monitorController", {
-                url:"/monitor",
+                url:"/monitor/:dataType/:siteId",
                 templateUrl: "/static/modules/monitor/pages/monitor.html",
                 controller: "monitorController"
             });

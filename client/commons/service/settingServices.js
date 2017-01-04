@@ -30,120 +30,74 @@ angular.module('settingservice',[])
         var monitorLists = [
             {
                 label: "全部数据源",
-                link: "#/monitor", 
+                link: "#/monitor/-1/-1", 
                 hasShow: true,
                 icon:"",
-                items: ""
+                items: "",
+                siteTypeId: -1,
+                siteId: -1
             },
             {
                 label: "新闻类",
-                link: "#/monitor?data_type = 0", 
+                link: "#/monitor/0/-1", 
                 hasShow:true,
                 icon:"",
+                siteTypeId: 0,
+                siteId: -1,
                 items: [
-                   {
-                        label: "网易新闻",
-                        link: "#/monitor?data_type =0&site_id = 1", 
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    },
-                    {
-                        label: "新浪新闻",
-                        link: "#/monitor?data_type =0&site_id = 2",  
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    }
+                  
                 ]
             },
             {
                 label: "论坛类",
-                link: "#/monitor?data_type = 1", 
+                link: "#/monitor/1/-1", 
                 hasShow:true,
                 icon:"",
+                siteTypeId: 1,
+                siteId: -1,
                 items: [
-                   {
-                        label: "天涯论坛",
-                        link: "#/monitor?data_type =1&site_id = 3", 
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    },
-                    {
-                        label: "虎扑论坛",
-                        link: "#/monitor?data_type =1&site_id = 4",  
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    }
+                  
                 ]
             },
             {
                 label: "微博类",
-                link: "#/monitor?data_type = 2", 
+                link: "#/monitor/2/-1", 
                 hasShow:true,
+                siteTypeId: 2,
+                siteId: -1,
                 icon:"",
                 items: [
-                   {
-                        label: "新浪微博",
-                        link: "#/monitor?data_type=2&site_id = 5", 
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    }
+                 
                 ]
             },
             {
                 label: "贴吧类",
-                link: "#/monitor?data_type = 3", 
+                link: "#/monitor/3/-1", 
                 hasShow:true,
+                siteTypeId: 3,
+                siteId: -1,
                 icon:"",
                 items: [
-                   {
-                        label: "高考吧",
-                        link: "#/monitor?data_type=2&site_id=6", 
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    },
-                    {
-                        label: "教育吧",
-                        link: "#/monitor?data_type=2&site_id=7",  
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    }
+                 
                 ]
             },
             {
                 label: "微信类",
-                link: "#/monitor?data_type = 4", 
+                link: "#/monitor/4/-1", 
                 hasShow:true,
                 icon:"",
+                siteTypeId: 4,
+                siteId: -1,
                 items: ""
             },
             {
                 label: "全网搜索",
-                link: "#/monitor?data_type =5", 
+                link: "#/monitor/5/-1", 
                 hasShow:true,
                 icon:"",
-                items: [
-                   {
-                        label: "百度搜索",
-                        link: "#/monitor?data_type=5&site_id=8", 
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    },
-                    {
-                        label: "贴吧搜索",
-                        link: "#/monitor?data_type =5&site_id=9",  
-                        hasShow: true,
-                        icon:"",
-                        items: ""
-                    }
-                ]
+                siteTypeId: 5,
+                siteId: -1,
+                items: ""
             }
         ];
         var senMessages = [
@@ -211,7 +165,7 @@ angular.module('settingservice',[])
             },
             {
                 label:"实时监控",
-                link: "#/monitor",
+                link: "#/monitor/-1/-1",
                 hasShow: true,
                 icon: "fa fa-eye",
                 items: monitorLists

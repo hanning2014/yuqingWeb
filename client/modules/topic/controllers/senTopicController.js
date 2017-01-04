@@ -10,7 +10,7 @@ CQ.mainApp.topicController
                 console.log("topic app start!!!");
                 App.runui();
                 getTopicData();
-                getData();
+                //getData();
             }
         });
         
@@ -18,41 +18,94 @@ CQ.mainApp.topicController
             var cons = {};
             cons.userId = 1;
             TopicFacService.getTopicData(cons).then(function(res){
-                console.log(res);
+                var imgs = ["/static/assets/img/1.jpg","/static/assets/img/2.jpg","/static/assets/img/3.jpg",
+                "/static/assets/img/4.jpg"];
+                res.forEach(function(d) {
+                    d.imgs = imgs;
+                });
+                $scope.data = res;
+                setInterval(function(){
+                    $scope.$apply(function(){
+                            drawClouds();
+                    　　　　});
+                　}, 1000);
+
+                
             },function(error) {
                 console.log(error);
-            })
-        }
-        function getData() {
-            $http.get("/static/assets/data/topic.json").success(function(data){
-                $scope.data = data.data;
-                console.log($scope.data);
             });
         }
 
-        $scope.openModal = function(){
-            $state.go("topicAnalysController", 1);
-            // ngDialog.open({
-            //     template:"/static/modules/topic/pages/topicAnalys.html",
-            //     controller: 'topicAnalys',
-            //     className: "ngDialog-theme-custom",
-            //     width: "70%",
-            //     scope: $scope
-            // });
+        function drawClouds() {
+            $scope.data.forEach(function (d) {
+                var doms = "wordsCloud_" + d.topicId;
+                if(document.getElementById(doms) != undefined) {
+                    //console.log("aaa");
+                    var chart = echarts.init(document.getElementById(doms));
+                var options = {
+                    series: [{
+                        type: 'wordCloud',
+                        gridSize: 20,
+                        sizeRange: [12, 50],
+                        rotationRange: [0, 0],
+                        shape: 'circle',
+                        textStyle: {
+                            normal: {
+                                color: function() {
+                                    return 'rgb(' + [
+                                        Math.round(Math.random() * 160),
+                                        Math.round(Math.random() * 160),
+                                        Math.round(Math.random() * 160)
+                                    ].join(',') + ')';
+                                }
+                            },
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowColor: '#333'
+                            }
+                        },
+                        data: []
+                    }]
+                };
+                var keylists = [];
+                d.topicKeywords.forEach(function (d) {
+                    var tt = {};
+                    tt.name = d;
+                    tt.value = Math.random() * 50 + 50;
+                    keylists.push(tt);
+                });
+                options.series[0].data = keylists;
+                chart.setOption(options);
+                }
+            });
+        }
+        $scope.openModal = function(topicId){
+            $state.go("topicAnalysController", {topicId: topicId});
         };
 
     }])
-    .controller("topicAnalysController", ["$rootScope", "$scope", "$http", function($rootScope, $scope, $http) {
+    .controller("topicAnalysController", ["$rootScope", "$scope", "$http", "$stateParams", "TopicFacService",
+        function($rootScope, $scope, $http, $stateParams, TopicFacService) {
         console.log("topicAnalys", "start!!!");
         $scope.postData = null;
         $scope.eventData = null;
         getTopicAnalysData();
         function getTopicAnalysData() {
-            $http.get("/static/assets/data/topicAnaly.json").success(function(res){
-                $scope.postData = res.data.postData;
-                console.log($scope.postData);
+            var cons = {};
+            cons.userId = 1;
+            cons.topicId = $stateParams.topicId;
+             TopicFacService.getTopicAnalyData(cons).then(function(res){
+                //console.log(res);
+                $scope.postData = res.postData;
                 drawChart();
+            },function(error) {
+                console.log(error);
             });
+            // $http.get("/static/assets/data/topicAnaly.json").success(function(res){
+            //     $scope.postData = res.data.postData;
+            //     console.log($scope.postData);
+            //     drawChart();
+            // });
         }
         function drawChart() {
             var dateFormat =d3.time.format("%Y-%m-%d %H:%M:%S");
@@ -167,12 +220,7 @@ CQ.mainApp.topicController
                     $scope.postData[0].postTime]))
                 .renderHorizontalGridLines(false)
                 .brushOn(true)
-                //dayDist.render();
             dayDist2.render();
             $("#dayDist2 g.axis.y").html("");
-
         }
-
-
-
     }]);

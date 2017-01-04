@@ -8,7 +8,7 @@ CQ.mainApp.topicController
                 controller: "senTopicController"
             })
             .state("topicAnalysController", {
-                url:"/senTopic/analys",
+                url:"/senTopic/:topicId",
                 templateUrl: "/static/modules/topic/pages/topicAnalys.html",
                 controller: "topicAnalysController"
             });

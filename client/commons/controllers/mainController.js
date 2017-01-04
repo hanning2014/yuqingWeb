@@ -1,10 +1,11 @@
 "use strict";
 CQ.mainApp.frameController
-	.controller('mainController', ['$scope', '$rootScope', '$state',
-		function($scope, $rootScope, $state) {
+	.controller('mainController', ['$scope', '$rootScope', '$state','DataSourceTree',
+		function($scope, $rootScope, $state, DataSourceTree) {
 		console.log("mainController", "start!");
 		$rootScope.mainController = false;
 		$scope.cardNums = 0;
+
 		$scope.$on('$includeContentLoaded', function(event, data) {
 			$scope.cardNums += 1;
 			if($scope.cardNums == 3) {
@@ -21,12 +22,44 @@ CQ.mainApp.frameController
 			$rootScope.headerController = true;
 			console.log("headerController", "start!");
 	}])
-	.controller('leftbarController', ['$scope', '$rootScope', '$state','DataSourceTree', 
-		function($scope, $rootScope, $state, DataSourceTree) {
+	.controller('leftbarController', ['$scope', '$rootScope', '$state','DataSourceTree',"$http", 
+		function($scope, $rootScope, $state, DataSourceTree,$http) {
 			//console.log(DataSourceTree.allLinks);
-			var lists = [];
+			$scope.allLinks = null;
+			$scope.$on('$viewContentLoaded', function() {
+	            if($rootScope.mainController) {
+	                App.runui();
+	            }
+        	});
+			$http.get("http://117.32.155.61:9091/yqdata/dataSourceTree/").then(function(datas) {
+				var allsites = datas.data.data.allSites;
+				DataSourceTree.allLinks[2].items.forEach(function(si) {
+					allsites.forEach(function(ss) {
+						if(ss.siteTypeId == si.siteTypeId) {
+							var detail = ss.detail_sites;
+							var items = [];
+							detail.forEach(function(de) {
+								var it = {};
+								it.hasShow = true;
+								it.icon = "";
+								it.items = "";
+								it.label = de.siteName;
+								it.siteTypeId = si.siteTypeId;
+								it.siteId = de.siteId;
+								it.link = "#/monitor/" +si.siteTypeId + "/" +  de.siteId;
+								items.push(it);
+							});
+							si.items = items;
+						}
+					});
+				});
+				console.log(DataSourceTree.allLinks[2].items);
+				$scope.allLinks = DataSourceTree.allLinks;
+				$rootScope.leftbartree = true;
+				
+			});
 			$scope.allLinks = DataSourceTree.allLinks;
-			$rootScope.leftbarController = true;
+			//console.log(DataSourceTree.allLinks[2].items);
 			$scope.moduleHomelinkclick = function(item) {
 				$scope.allLinks.forEach(function(d) {
 					d.isActive = "";
