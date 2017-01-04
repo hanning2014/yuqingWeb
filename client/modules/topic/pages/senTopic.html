@@ -1,26 +1,47 @@
 <div id="content" class="content">
     <!-- begin breadcrumb -->
-    <ol class="breadcrumb pull-right">
+    <!-- <ol class="breadcrumb pull-right">
         <li><a href="javascript:;">Home</a></li>
         <li><a href="javascript:;">Page Options</a></li>
         <li class="active">Blank Page</li>
-    </ol>
+    </ol> -->
     <!-- end breadcrumb -->
-    <!-- begin page-header -->
-    <h1 class="page-header">Blank Page <small>header small text goes here...</small></h1>
-    <!-- end page-header -->
-    <div class="panel panel-inverse">
-        <div class="panel-heading">
-            <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+    <div class='row'>
+        <div class="col-md-6 ui-sortable" ng-repeat="item in data">
+            <!-- begin panel -->
+            <div class="panel panel-inverse" data-sortable-id="ui-media-object-3">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                       <!--  <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse" data-original-title="" title=""><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+                    </div>
+                    <h4 class="panel-title">敏感话题</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="media media-lg">
+                        <!-- 轮播图 -->
+                        <div class='media-left'>
+                            <carousel interval=30000 >
+                            <slide ng-repeat="slide in item.imgs" >
+                            <img ng-src="{{slide}}" style="max-width:250px;width:250px;height:180px;">
+                            <!-- <div class="carousel-caption">
+                                <p>{{slide.text}}</p>
+                            </div> -->
+                            </slide>
+                            </carousel>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{item.topicName}}</h4>
+                            {{item.topicKeywords}}
+                        </div>
+                    </div>
+                </div>
+                <p class='text-right p-b-10'>
+                    <a href="javascript:;" class="btn btn-primary btn-xs m-r-5" ng-click="openModal()">话题分析</a>
+                </p>
             </div>
-            <h4 class="panel-title">Panel Title here</h4>
-        </div>
-        <div class="panel-body">
-            Panel Content Here
         </div>
     </div>
 </div>

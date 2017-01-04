@@ -6,12 +6,12 @@ CQ.mainApp.topicController
                 url:"/senTopic",
                 templateUrl: "/static/modules/topic/pages/senTopic.html",
                 controller: "senTopicController"
+            })
+            .state("topicAnalysController", {
+                url:"/senTopic/analys",
+                templateUrl: "/static/modules/topic/pages/topicAnalys.html",
+                controller: "topicAnalysController"
             });
-            // .state("cardPost", {
-            //     url:"/monitor/:siteId",
-            //     templateUrl: "/static/modules/monitor/pages/monitor.html",
-            //     controller: "manageSettingController"
-            // })
             // .state("", {
             //     url:"",
             //     templateUrl: "/static/modules/monitor/pages/monitor.html",

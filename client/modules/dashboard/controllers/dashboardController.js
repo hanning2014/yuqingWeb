@@ -74,8 +74,8 @@ CQ.mainApp.dashboardController
                 drawPieDatatypeDist(datatypeDist, datatypeDim, datatypeGroup);
             }
             function drawPieDatatypeDist(datatypeDist, datatypeDim, datatypeGroup) {
-                var width = $("datatypeDist").width() * 0.9,
-                height = $("datatypeDist").height() * 0.9;
+                var width = $("#datatypeDist").width() * 0.9,
+                height = $("#datatypeDist").height() * 0.9;
                 datatypeDist
                     .width(width)
                     .height(height)

@@ -153,8 +153,11 @@
 					<div class="height-sm" data-scrollbar="true">
 						<ul class="media-list media-list-with-divider">
 							<li class="media media-sm" ng-repeat = "(index, items) in HotPost">
-								<a href="javascript:;" class="pull-left">
+								<a href="javascript:;" class="pull-left" ng-if = "items.board != 'Sina'">
 									<img src="/static/assets/img/tieba.svg" alt="" class="media-object rounded-corner" />
+								</a>
+								<a href="javascript:;" class="pull-left" ng-if = "items.board == 'Sina'">
+									<img src="/static/assets/img/weibo.svg" alt="" class="media-object rounded-corner" />
 								</a>
 								<div class="media-body">
 									<a href="javascript:;"><h4 class="media-heading" ng-bind = "items.title"></h4></a>
