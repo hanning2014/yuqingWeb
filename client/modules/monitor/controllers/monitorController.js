@@ -14,6 +14,7 @@ CQ.mainApp.monitorController
         $scope.topicLists = null;
         $scope.dataType = $stateParams.dataType;
         $scope.siteId = $stateParams.siteId;
+        $scope.freshLists = [];
         $scope.$on('$viewContentLoaded', function() {
             if($rootScope.mainController) {
                 console.log("monitor app start!!!");
@@ -46,8 +47,10 @@ CQ.mainApp.monitorController
                 topicLists.push(tl);
             });
             cons.topicLists = topicLists;
-            console.log(cons);
-            $interval(function(){
+            //cons = 'date=2016-12-30&siteId=-1&dataType=-1&topicLists=[{"topicId":1, "newTime":"2016-12-30 00:00:00"},{"topicId":2,"newTime":"2016-12-30 00:00:00"},{"topicId":-1,"newTime":"2016-12-30 00:00:00"}]';
+            //cons.topicLists=[{"topicId":1, "newTime":"2016-12-30 00:00:00"},{"topicId":2,"newTime":"2016-12-30 00:00:00"},{"topicId":-1,"newTime":"2016-12-30 00:00:00"}]
+            //console.log(cons);
+            var ll = $interval(function(){
                 $(".loads").slideDown("slow");
                 //$(".loads").removeClass("hidden");
                 MonitorFacService.getFreshData(cons).then(function(res) {
@@ -66,8 +69,13 @@ CQ.mainApp.monitorController
                     console.log(error);
                 });
             },10000);
-           
+           $scope.freshLists.push(ll);
         }
+        $scope.$on('$destroy',function(){
+           $scope.freshLists.forEach(function (d) {
+                $interval.cancel(d);
+           });
+        }); 
         $scope.post = '<li class="media media-sm">'+
                         '<a href="javascript:;" class="pull-left">' +
                             '<img src="/static/assets/img/user-1.jpg" alt="" class="media-object rounded-corner">'+
