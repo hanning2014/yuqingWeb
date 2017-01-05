@@ -4,7 +4,7 @@ CQ.mainApp.monitorController
     "$location","$stateParams",function ($rootScope, $scope, $interval,ngDialog, MonitorFacService, 
         $location, $stateParams) {
         console.log("monitorController", "start!!!");
-        console.log($location.path());
+        //console.log($location.path());
         console.log($stateParams.dataType);
         console.log($stateParams.siteId);
         //页面UI初始化；
@@ -12,6 +12,8 @@ CQ.mainApp.monitorController
         $scope.monitortopic_id = null;
         $scope.monitorData = null;
         $scope.topicLists = null;
+        $scope.dataType = $stateParams.dataType;
+        $scope.siteId = $stateParams.siteId;
         $scope.$on('$viewContentLoaded', function() {
             if($rootScope.mainController) {
                 console.log("monitor app start!!!");
@@ -21,30 +23,63 @@ CQ.mainApp.monitorController
         getMonitorData();
         function getMonitorData() {
             var cons = {};
-            cons.dataType = -1;
-            cons.siteId = -1;
-            cons.date = "2016-12-30";
-            cons.pageNum = 1;
+            cons.dataType = $scope.dataType ;
+            cons.siteId = $scope.siteId;
+            cons.date = "2017-01-05";
             cons.pageCount = 20;
             MonitorFacService.getMonitorData(cons).then(function(res){
                 console.log(res);
                 $scope.monitorData = res.topic;
+                getFreshData(cons);
             },function(error){
                 console.log(error);
             });
+        };
+
+        // fresh data
+        function getFreshData(cons) {
+            var topicLists = [];
+            $scope.monitorData.forEach(function (d) {
+                var tl = {};
+                tl.topicId = d.topicId;
+                tl.newTime = (d.newTime == null) ? "": d.newTime;
+                topicLists.push(tl);
+            });
+            cons.topicLists = topicLists;
+            console.log(cons);
+            $interval(function(){
+                $(".loads").slideDown("slow");
+                //$(".loads").removeClass("hidden");
+                MonitorFacService.getFreshData(cons).then(function(res) {
+                    //$(".loads").addClass("hidden");
+                    $(".loads").slideUp("slow");
+
+                    console.log(res);
+                },function(error) {
+                    $(".loads").slideUp("slow");
+                    //$(".loads").addClass("hidden");
+                    for(var i = 0; i < $(".panel").length; i ++) {
+                        var t  =  $(".panel")[i];
+                        var n = $(t).find(".panel-body");
+                        $(n).find("ul .loads").after($scope.post);
+                    }
+                    console.log(error);
+                });
+            },10000);
+           
         }
-        // $scope.post = '<li class="media media-sm">'+
-        //                 '<a href="javascript:;" class="pull-left">' +
-        //                     '<img src="/static/assets/img/user-1.jpg" alt="" class="media-object rounded-corner">'+
-        //                 '</a>'+
-        //                 '<div class="media-body">'+
-        //                     '<a href="javascript:;"><h4 class="media-heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4></a>'+
-        //                     '<p class="m-b-5">'+
-        //                         'Aenean mollis arcu sed turpis accumsan dignissim. Etiam vel tortor at risus tristique convallis. Donec adipiscing euismod arcu id euismod. Suspendisse potenti. Aliquam lacinia sapien ac urna placerat, eu interdum mauris viverra.'+
-        //                     '</p>'+
-        //                     '<i class="text-muted">Received on 04/16/2013, 12.39pm</i>'+
-        //                 '</div>'+
-        //              '</li>';
+        $scope.post = '<li class="media media-sm">'+
+                        '<a href="javascript:;" class="pull-left">' +
+                            '<img src="/static/assets/img/user-1.jpg" alt="" class="media-object rounded-corner">'+
+                        '</a>'+
+                        '<div class="media-body">'+
+                            '<a href="javascript:;"><h4 class="media-heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4></a>'+
+                            '<p class="m-b-5">'+
+                                'Aenean mollis arcu sed turpis accumsan dignissim. Etiam vel tortor at risus tristique convallis. Donec adipiscing euismod arcu id euismod. Suspendisse potenti. Aliquam lacinia sapien ac urna placerat, eu interdum mauris viverra.'+
+                            '</p>'+
+                            '<i class="text-muted">Received on 04/16/2013, 12.39pm</i>'+
+                        '</div>'+
+                     '</li>';
         // $interval(function(){
         //     console.log($(".panel"));
         //     for(var i = 0; i < $(".panel").length; i ++) {
@@ -81,14 +116,42 @@ CQ.mainApp.monitorController
         };
         $scope.refreshData = function(topic_id) {
             var doms = "#topic_" + topic_id;
-            angular.element(doms).find(".loads").removeClass("hidden");
-            $interval(function(){
-                angular.element(doms).find(".loads").addClass("hidden");
-            }, 5000);
+            //angular.element(doms).find(".loads").removeClass("hidden");
+            // $interval(function(){
+            //     angular.element(doms).find(".loads").addClass("hidden");
+            // }, 5000);
         };
 
-        $scope.showMore = function() {
+        $scope.showMore = function(topicId) {
+            console.log(topicId);
             console.log('show more triggered');  
+            var cons = {};
+            cons.dataType = $scope.dataType ;
+            cons.siteId = $scope.siteId;
+            cons.date = "2017-01-05";
+            cons.pageCount = 20;
+            cons.topicId = topicId;
+            $scope.monitorData.forEach(function(d) {
+                console.log(d);
+                if(d.topicId == topicId) {
+                    cons.oldTime = d.oldTime;
+                }
+            })
+            angular.element("#topic_" + topicId).find(".loadsMore").slideDown("slow");
+            MonitorFacService.getLoadData(cons).then(function(res) {
+                angular.element("#topic_" + topicId).find(".loadsMore").slideUp("slow");
+                console.log(res);
+                $scope.monitorData.forEach(function(d) {
+                    if(res[0].topicId == d.topicId){
+                        d.oldTime = res[0].oldTime;
+                        res[0].postData.forEach(function (mm) {
+                            d.postData.push(mm);
+                        })
+                    }
+                })
+            }, function (error) {
+                console.log(error);
+            });
         };
 
         $scope.panelCollapse = function(topic_id) {

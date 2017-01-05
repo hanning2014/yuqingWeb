@@ -75,8 +75,9 @@
                     </div>
                     <div class="panel-body">
                         <div  class = "">
-                            <ul class="media-list media-list-with-divider overflow-y-scroll h-800" scrolly="showMore()">
-                                <div class = "width-full m-t-20 hidden loads">
+                            <ul class="media-list media-list-with-divider overflow-y-scroll h-800" scrolly="showMore(
+                            {{items.topicId}})">
+                                <div class = "width-full m-t-20 loads" style = "display:none">
                                     <p class = "text-center">
                                         <i class = "fa post_loading">
                                         </i>
@@ -111,6 +112,12 @@
                                             </a>
                                     </div>
                                 </li>
+                                <div class = "width-full m-t-20 loadsMore" style = "display:none">
+                                    <p class = "text-center">
+                                        <i class = "fa post_loading">
+                                        </i>
+                                    </p>
+                                </div>
                             </ul>
                         </div>
                     </div>
