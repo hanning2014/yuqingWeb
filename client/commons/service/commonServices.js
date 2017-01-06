@@ -38,6 +38,7 @@ angular.module('commons',[])
         var self = {},
         headers = {
             "Content-Type": "application/json",
+            //'Content-Type':'application/x-www-form-urlencoded'
         };
         self.params = {};
         self.actions = {
@@ -48,7 +49,7 @@ angular.module('commons',[])
             },
             'save': {
                 method: 'POST',
-                headers: headers
+                headers: headers,
             },
             'get': {
                 method: 'GET',

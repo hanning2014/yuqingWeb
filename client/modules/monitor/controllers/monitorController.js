@@ -1,12 +1,9 @@
 "use strict";
 CQ.mainApp.monitorController
    .controller("monitorController", ["$rootScope", "$scope", "$interval", "ngDialog","MonitorFacService",
-    "$location","$stateParams",function ($rootScope, $scope, $interval,ngDialog, MonitorFacService, 
-        $location, $stateParams) {
+    "$location","$stateParams", "$http", "PostDataService", function ($rootScope, $scope, $interval,
+        ngDialog, MonitorFacService, $location, $stateParams, $http, PostDataService) {
         console.log("monitorController", "start!!!");
-        //console.log($location.path());
-        console.log($stateParams.dataType);
-        console.log($stateParams.siteId);
         //页面UI初始化；
         $scope.topic_id = null;
         $scope.monitortopic_id = null;
@@ -26,11 +23,11 @@ CQ.mainApp.monitorController
             var cons = {};
             cons.dataType = $scope.dataType ;
             cons.siteId = $scope.siteId;
-            cons.date = "2017-01-05";
+            cons.date = "2017-01-06";
             cons.pageCount = 20;
             MonitorFacService.getMonitorData(cons).then(function(res){
                 console.log(res);
-                $scope.monitorData = res.topic;
+                $scope.monitorData = res;
                 getFreshData(cons);
             },function(error){
                 console.log(error);
@@ -43,33 +40,57 @@ CQ.mainApp.monitorController
             $scope.monitorData.forEach(function (d) {
                 var tl = {};
                 tl.topicId = d.topicId;
-                tl.newTime = (d.newTime == null) ? "": d.newTime;
+                tl.newTime = d.newTime;
                 topicLists.push(tl);
             });
             cons.topicLists = topicLists;
-            //cons = 'date=2016-12-30&siteId=-1&dataType=-1&topicLists=[{"topicId":1, "newTime":"2016-12-30 00:00:00"},{"topicId":2,"newTime":"2016-12-30 00:00:00"},{"topicId":-1,"newTime":"2016-12-30 00:00:00"}]';
-            //cons.topicLists=[{"topicId":1, "newTime":"2016-12-30 00:00:00"},{"topicId":2,"newTime":"2016-12-30 00:00:00"},{"topicId":-1,"newTime":"2016-12-30 00:00:00"}]
-            //console.log(cons);
-            var ll = $interval(function(){
-                $(".loads").slideDown("slow");
-                //$(".loads").removeClass("hidden");
-                MonitorFacService.getFreshData(cons).then(function(res) {
-                    //$(".loads").addClass("hidden");
-                    $(".loads").slideUp("slow");
+            console.log(JSON.stringify(cons));
 
-                    console.log(res);
-                },function(error) {
-                    $(".loads").slideUp("slow");
-                    //$(".loads").addClass("hidden");
-                    for(var i = 0; i < $(".panel").length; i ++) {
-                        var t  =  $(".panel")[i];
-                        var n = $(t).find(".panel-body");
-                        $(n).find("ul .loads").after($scope.post);
-                    }
-                    console.log(error);
-                });
+            var ll = $interval(function(){
+                    $(".loads").slideDown("slow");
+                    PostDataService.flushData(JSON.stringify(cons)).then(function(freshdata) {
+                        console.log(freshdata.data.data);
+                        var res = freshdata.data.data;
+                        $scope.monitorData.forEach(function(d) {
+                            res.forEach(function(rr) {
+                                if(rr.topicId == d.topicId){
+                                    d.newTime = rr.newTime;
+                                    rr.postData.forEach(function (mm) {
+                                        d.postData.unshift(mm);
+                                    });
+                                }
+                            });
+                        });
+                        $(".loads").slideUp("slow");
+                    },function(error) {
+                        console.log(error);
+                    });
             },10000);
-           $scope.freshLists.push(ll);
+            $scope.freshLists.push(ll);
+            // $http.post('http://117.32.155.61:9091/yqdata/monitor/flush/', JSON.stringify(cons))
+            //     .success(function(rr){
+            //         console.log(rr);
+            //     // some code
+            // });
+            // var ll = $interval(function(){
+            //     $(".loads").slideDown("slow");
+            //     //$(".loads").removeClass("hidden");
+            //     MonitorFacService.getFreshData(JSON.stringify(cons)).then(function(res) {
+            //         //$(".loads").addClass("hidden");
+            //         $(".loads").slideUp("slow");
+
+            //         console.log(res);
+            //     },function(error) {
+            //         $(".loads").slideUp("slow");
+            //         for(var i = 0; i < $(".panel").length; i ++) {
+            //             var t  =  $(".panel")[i];
+            //             var n = $(t).find(".panel-body");
+            //             $(n).find("ul .loads").after($scope.post);
+            //         }
+            //         console.log(error);
+            //     });
+            // },10000);
+           // $scope.freshLists.push(ll);
         }
         $scope.$on('$destroy',function(){
            $scope.freshLists.forEach(function (d) {
@@ -88,25 +109,12 @@ CQ.mainApp.monitorController
                             '<i class="text-muted">Received on 04/16/2013, 12.39pm</i>'+
                         '</div>'+
                      '</li>';
-        // $interval(function(){
-        //     console.log($(".panel"));
-        //     for(var i = 0; i < $(".panel").length; i ++) {
-        //         var t  =  $(".panel")[i];
-        //         var n = $(t).find(".panel-body");
-        //         $(n).find("ul .loads").after($scope.post);
-        //         $(".loads").removeClass("hidden");
-        //     }
-        // }, 20000);
-
-        // $interval(function(){
-        //     $(".loads").addClass("hidden");
-        // }, 30000);
-
+        // move positions
         $scope.movePosition = function(topic_id) {
             console.log(topic_id);
             var ht = $("#topic_"+topic_id+"");
             if($("#topic_"+topic_id+"")) {
-                $("#topic_"+topic_id+"").hide("slow");
+                //$("#topic_"+topic_id+"").hide("slow");
                 $("#topicLists").prepend(ht);
                 $("#topic_"+topic_id+"").fadeIn("slow");
             }
@@ -136,7 +144,7 @@ CQ.mainApp.monitorController
             var cons = {};
             cons.dataType = $scope.dataType ;
             cons.siteId = $scope.siteId;
-            cons.date = "2017-01-05";
+            cons.date = "2017-01-06";
             cons.pageCount = 20;
             cons.topicId = topicId;
             $scope.monitorData.forEach(function(d) {
@@ -144,7 +152,7 @@ CQ.mainApp.monitorController
                 if(d.topicId == topicId) {
                     cons.oldTime = d.oldTime;
                 }
-            })
+            });
             angular.element("#topic_" + topicId).find(".loadsMore").slideDown("slow");
             MonitorFacService.getLoadData(cons).then(function(res) {
                 angular.element("#topic_" + topicId).find(".loadsMore").slideUp("slow");
@@ -154,9 +162,9 @@ CQ.mainApp.monitorController
                         d.oldTime = res[0].oldTime;
                         res[0].postData.forEach(function (mm) {
                             d.postData.push(mm);
-                        })
+                        });
                     }
-                })
+                });
             }, function (error) {
                 console.log(error);
             });

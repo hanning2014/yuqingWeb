@@ -34,6 +34,10 @@ angular.module('mainApp', [
             //     templateUrl: "/static/modules/dashboard/pages/dashboard.html",
             //     controller: "dashboardController"
             // });
+            // $httpProvider.defaults.headers.common = {};
+            // $httpProvider.defaults.headers.post = {};
+            // $httpProvider.defaults.headers.put = {};
+            // $httpProvider.defaults.headers.patch = {};
         }
     ])
     .run(['$rootScope', '$window', '$location', '$log', function($rootScope, $window, $location, $log) {

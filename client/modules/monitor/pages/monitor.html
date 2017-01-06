@@ -75,9 +75,8 @@
                     </div>
                     <div class="panel-body">
                         <div  class = "">
-                            <ul class="media-list media-list-with-divider overflow-y-scroll h-800" scrolly="showMore(
-                            {{items.topicId}})">
-                                <div class = "width-full m-t-20 loads" style = "display:none">
+                            <ul class="media-list media-list-with-divider overflow-y-scroll h-800" scrolly="showMore({{items.topicId}})">
+                                <div class = "width-full m-t-10 m-b-10 loads" style = "display:none">
                                     <p class = "text-center">
                                         <i class = "fa post_loading">
                                         </i>
@@ -116,6 +115,11 @@
                                     <p class = "text-center">
                                         <i class = "fa post_loading">
                                         </i>
+                                    </p>
+                                </div>
+                                <div class="alert alert-info fade in m-b-15  m-t-15 width-full" style = "display:none" >
+                                    <p class = "text-center">
+                                        <strong> 没有更多消息啦! </strong>
                                     </p>
                                 </div>
                             </ul>
