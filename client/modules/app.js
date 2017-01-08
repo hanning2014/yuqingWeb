@@ -6,7 +6,7 @@ CQ.mainApp = {
     topicController:         angular.module("topic.Controller", ["topicService"]),
     monitorController:       angular.module("monitor.Controller", ["monitorService"]),
     senmessageController:    angular.module("senmessage.Controller", []),
-    systemsettingController: angular.module("systemsetting.Controller", []),
+    systemsettingController: angular.module("systemsetting.Controller", ["Notice"]),
     searchController:        angular.module("search.Controller", [])
 };
 angular.module('mainApp', [

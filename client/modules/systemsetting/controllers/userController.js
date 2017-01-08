@@ -1,12 +1,48 @@
 "use strict";
 CQ.mainApp.systemsettingController
-    .controller("userSettingController", ["$rootScope", "$scope", "$http", function ($rootScope, $scope, $http) {
+    .controller("userSettingController", ["$rootScope", "$scope", "$http", "ngDialog", "notice",function ($rootScope, 
+        $scope, $http, ngDialog, notice) {
         console.log("userSettingController", "start!!!");
-        
+        $scope.topic_id = null;
+        //页面UI初始化；
+        $scope.$on('$viewContentLoaded', function() {
+            if($rootScope.mainController) {
+                $scope.userId = 1;
+                $scope.baseUrl = "http://117.32.155.61:9091/yqdata";
+                var url = $scope.baseUrl+"/settopic/?userId=" + $scope.userId;
+                // var url = "/static/setup.json";
+                var sites = "";
+                $scope.page = 0;
+                $http.get(url).success(function(data){
+                    console.log(data.data.topicData);
+                    data.data.topicData.forEach(function(d){
+                        sites = "";
+                        d.siteLists.forEach(function(site){
+                            if(sites != "")
+                            {
+                                sites += ",";
+                            }
+                            if(site.siteName)
+                            {
+                                sites += site.siteName;
+                            }
+                        });
+                        d.sitesStr = sites;
+                    });
+                    $scope.topicList = data.data.topicData;
+                    $scope.topicCount = $scope.topicList.length;
+                    $scope.allsites = data.data.allSites;
+                    $scope.getDataByPage($scope.page);
+                });
+                console.log("userSetting app start!!!");
+                App.runui();
+            }
+        });
+
         $scope.onDragComplete = function($data,$event)
         {
             
-        }
+        };
 
         $scope.onDropComplete = function($data,$event)
         {
@@ -29,10 +65,11 @@ CQ.mainApp.systemsettingController
                     }
                 }
             }
-        }
+        };
         //拖动全选
         $scope.onAllDrag = function($data,$event)
         {
+            //$event.stopPropagation();
             for(var i = 0; i < $scope.allsites.length; i++)
             {
                 if($scope.allsites[i].siteTypeId ==$data.siteTypeId)
@@ -45,7 +82,7 @@ CQ.mainApp.systemsettingController
                     return;
                 }
             }
-        }
+        };
 
         //全选
         $scope.onAllSelected = function(d)
@@ -58,17 +95,16 @@ CQ.mainApp.systemsettingController
         //删除话题
         $scope.remove = function(d)
         {
-            $scope.removeUrl = $scope.baseUrl + "/deletetopic/";
-            $http({
-                params: {topicId : d.topicId, userId : $scope.userId},
-                url: $scope.removeUrl,
-                method: 'get',
-            })
-            .success(function(data, status, headers, config){
-                window.location.reload("index.html#/userSetting");
-            })
-            .error(function(){});
-        }
+            $scope.topic_id = d.topicId;
+            console.log($scope.topic_id);
+            ngDialog.open(
+            {
+                template: '/static/modules/systemsetting/pages/deleteTopic.html',
+                controller: 'deleteTopic',
+                width:"10%",
+                scope:$scope
+            });
+        };
         $scope.toggle = function (scope) {
             scope.toggle();
         };
@@ -90,16 +126,20 @@ CQ.mainApp.systemsettingController
                 method: 'post',
                 data: $scope.jsonData,
             }).success(function(data, status, headers, config){
-                if(data.success == false)
-                    alert("操作失败!即将为您跳转...");
-                else(data.success == true)
-                    alert("操作成功!即将为您跳转...");
+                if(data.success == false) {
+                    //alert("操作失败!即将为您跳转...");
+                    notice.notify_info("您好！", "操作失败，请重试！" ,"",false,"","");
+                }
+                else if(data.success == true){
+                    notice.notify_info("您好！", "话题操作成功！" ,"",false,"","");
+                }
                 setTimeout(function(){
                     window.location.reload("index.html#/userSetting");
-                },1000);
+                },2000);
             })
             .error(function(){
-                alert("未知的错误!即将为您跳转...");
+                //alert("未知的错误!即将为您跳转...");
+                notice.notify_info("您好！", "服务器出错！！" ,"",false,"","");
             });
         }
         //添加话题
@@ -173,95 +213,52 @@ CQ.mainApp.systemsettingController
                             });
                         });
                     });
-                }
-        //页面UI初始化；
-        $scope.$on('$viewContentLoaded', function() {
-            if($rootScope.mainController) {
-                $scope.userId = 1;
-                $scope.baseUrl = "http://117.32.155.61:9091/yqdata";
-                var url = $scope.baseUrl+"/settopic/?userId=" + $scope.userId;
-                // var url = "/static/setup.json";
-                var sites = "";
-                $scope.page = 0;
-                $http.get(url).success(function(data){
-                    console.log(data.data.topicData);
-                    data.data.topicData.forEach(function(d){
-                        sites = "";
-                        d.siteLists.forEach(function(site){
-                            if(sites != "")
-                            {
-                                sites += ",";
-                            }
-                            if(site.siteName)
-                            {
-                                sites += site.siteName;
-                            }
-                        });
-                        d.sitesStr = sites;
-                    });
-                    $scope.topicList = data.data.topicData;
-                    $scope.topicCount = $scope.topicList.length;
-                    console.log($scope.topicList);
+        };
+   }])
+    .controller("deleteTopic", ["$rootScope", "$scope", "$http", "ngDialog", "notice",function($rootScope, $scope, 
+        $http, ngDialog, notice) {
+        console.log("delete topic");
+        $scope.deleteTopic = function() {
+            $scope.removeUrl = $scope.baseUrl + "/deletetopic/";
+            $http({
+                params: {topicId : $scope.topic_id, userId : $scope.userId},
+                url: $scope.removeUrl,
+                method: 'get',
+            })
+            .success(function(data, status, headers, config){
+                ngDialog.closeAll();
+                notice.notify_info("您好！","话题删除成功！","",false,"","");
+                setTimeout(function(){
+                    window.location.reload("index.html#/userSetting");
+                },2000);
+            })
+            .error(function(error){
+                notice.notify_info("您好！", "操作失败，请重试！" ,"",false,"","");
+            });
+        };
+    }]);
+//CQ.mainApp.systemsettingController.directive('nameexistCheck', nameexistCheck);
 
-                    // $scope.group = data.data.allSites;
-                    //站点分类
-                    // data.allsites.forEach(function(d){
-                    //     console.log(d.siteTypeName);
-                    //     for(var i=0;i<$scope.group.length;i++)
-                    //     {
-                    //         console.log("group.id");
-                    //         console.log($scope.group[i].id);
-                    //         console.log("siteid");
-                    //         console.log(d.siteTypeId);
-                    //         if($scope.group[i].id == d.siteTypeId)
-                    //         {
-                    //             $scope.group[i].nodes.push(d);
-                    //             break;
-                    //         }
-                    //     }
-                    //     if(i >= $scope.group.length)
-                    //     {
-                    //         var oneTypeSites = {};
-                    //         oneTypeSites.id = d.siteTypeId;
-                    //         oneTypeSites.siteName = d.siteTypeName;
-                    //         oneTypeSites.nodes = [];
-                    //         oneTypeSites.nodes.push(d);
-                    //         $scope.group.push(oneTypeSites);
-                    //     }
-                    // });
-                    $scope.allsites = data.data.allSites;
-                    $scope.getDataByPage($scope.page);
-                    console.log($scope.allsites);
+// // nameexistCheck.$inject = ['$http', '$q'];
 
-                });
-                console.log("monitor app start!!!");
-                App.runui();
-            }
-        });
-        
-   }]);
-CQ.mainApp.systemsettingController.directive('nameexistCheck', nameexistCheck);
-
-// nameexistCheck.$inject = ['$http', '$q'];
-
-function nameexistCheck(){
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link:function($scope,element,attrs,ctrl){
-            // 同步验证
-            ctrl.$validators.exist = function(modelValue, viewValue) {
-                if($scope.modelName!='添加话题' || $scope.topicList == undefined)
-                    return true;
-                var value = modelValue || viewValue; 
-                for(var index = 0; index<$scope.topicList.length; index++)
-                {
-                    if($scope.topicList[index].topicName == value)
-                    {console.log(false);
-                        return false;}    
-                }
-                return true;
-            };
-        }
-    }
-}
+// function nameexistCheck(){
+//     return {
+//         restrict: 'A',
+//         require: 'ngModel',
+//         link:function($scope,element,attrs,ctrl){
+//             // 同步验证
+//             ctrl.$validators.exist = function(modelValue, viewValue) {
+//                 if($scope.modelName!='添加话题' || $scope.topicList == undefined)
+//                     return true;
+//                 var value = modelValue || viewValue; 
+//                 for(var index = 0; index<$scope.topicList.length; index++)
+//                 {
+//                     if($scope.topicList[index].topicName == value)
+//                     {console.log(false);
+//                         return false;}    
+//                 }
+//                 return true;
+//             };
+//         }
+//     }
+// }

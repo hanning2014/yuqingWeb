@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="email-btn-row hidden-xs">
-                <a href="#myModal" class="btn btn-sm btn-inverse" ng-click="newTopic()" data-toggle="modal" data-backdrop="false"><i class="fa fa-plus m-r-5"></i> New</a>
-                <span class="dropdown">
+                <a href="#myModal" class="btn btn-sm btn-inverse" ng-click="newTopic()" data-toggle="modal" data-backdrop="false"><i class="fa fa-plus m-r-5"></i> 新建话题 </a>
+                <!-- <span class="dropdown">
                     <a href="email_inbox.html#" class="email-header-link btn btn-sm btn-inverse" data-toggle="dropdown">View All <i class="fa fa-angle-down m-l-5"></i></a>
                     <ul class="dropdown-menu">
                         <li class="active"><a href="email_inbox.html#">All</a></li>
@@ -36,13 +36,13 @@
                             </span>
                         </div>
                     </form>
-                </span>
+                </span> -->
             </div>
             <div class="email-content">
                 <table class="table table-email">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th ng-show = "false">ID</th>
                             <th>话题名称</th>
                             <th>查询关键字</th>
                             <th>爬取站点</th>
@@ -51,7 +51,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="topicItem in pageData">
-                            <td style="width: 10%">{{topicItem.topicId}}</td>
+                            <td style="width: 10%" ng-show = "false">{{topicItem.topicId}}</td>
                             <td style="width: 15%">{{topicItem.topicName}}</td>
                             <td style="width: 30%">{{topicItem.topicKeywords.toString()}}</td>
                             <td style="width: 35%">{{topicItem.sitesStr}}</td>
