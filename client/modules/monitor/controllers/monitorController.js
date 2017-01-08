@@ -23,7 +23,7 @@ CQ.mainApp.monitorController
             var cons = {};
             cons.dataType = $scope.dataType ;
             cons.siteId = $scope.siteId;
-            cons.date = "2017-01-06";
+            cons.date = "2017-01-08";
             cons.pageCount = 20;
             MonitorFacService.getMonitorData(cons).then(function(res){
                 console.log(res);
@@ -36,33 +36,34 @@ CQ.mainApp.monitorController
 
         // fresh data
         function getFreshData(cons) {
-            var topicLists = [];
-            $scope.monitorData.forEach(function (d) {
-                var tl = {};
-                tl.topicId = d.topicId;
-                tl.newTime = d.newTime;
-                topicLists.push(tl);
-            });
-            cons.topicLists = topicLists;
-            console.log(JSON.stringify(cons));
-
             var ll = $interval(function(){
-                    $(".loads").slideDown("slow");
-                    PostDataService.flushData(JSON.stringify(cons)).then(function(freshdata) {
+                $(".loads").slideDown("slow");
+                var topicLists = [];
+                $scope.monitorData.forEach(function (d) {
+                    var tl = {};
+                    tl.topicId = d.topicId;
+                    tl.newTime = d.newTime;
+                    topicLists.push(tl);
+                });
+                cons.topicLists = topicLists;
+                console.log(JSON.stringify(cons));
+                    PostDataService.flushData(cons).then(function(freshdata) {
                         console.log(freshdata.data.data);
                         var res = freshdata.data.data;
                         $scope.monitorData.forEach(function(d) {
                             res.forEach(function(rr) {
                                 if(rr.topicId == d.topicId){
                                     d.newTime = rr.newTime;
-                                    rr.postData.forEach(function (mm) {
-                                        d.postData.unshift(mm);
-                                    });
+                                    if(rr.postData.length != 0) {
+                                        d.postData = rr.postData.concat(d.postData);
+                                    }
                                 }
                             });
                         });
+                        console.log($scope.monitorData);
                         $(".loads").slideUp("slow");
                     },function(error) {
+                        $(".loads").slideUp("slow");
                         console.log(error);
                     });
             },10000);
@@ -144,7 +145,7 @@ CQ.mainApp.monitorController
             var cons = {};
             cons.dataType = $scope.dataType ;
             cons.siteId = $scope.siteId;
-            cons.date = "2017-01-06";
+            cons.date = "2017-01-08";
             cons.pageCount = 20;
             cons.topicId = topicId;
             $scope.monitorData.forEach(function(d) {

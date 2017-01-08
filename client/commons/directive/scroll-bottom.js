@@ -5,7 +5,7 @@ angular.module('scrollBottom',[])
             restrict: 'A',
             link: function (scope, element, attrs) {
                 var raw = element[0];
-                console.log('loading directive');
+                //console.log('loading directive');
                 element.bind('scroll', function () {
                    // console.log('in scroll');
                     //console.log(raw.scrollTop + raw.offsetHeight);
