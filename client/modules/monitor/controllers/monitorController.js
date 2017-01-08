@@ -1,8 +1,9 @@
 "use strict";
 CQ.mainApp.monitorController
    .controller("monitorController", ["$rootScope", "$scope", "$interval", "ngDialog","MonitorFacService",
-    "$location","$stateParams", "$http", "PostDataService", function ($rootScope, $scope, $interval,
-        ngDialog, MonitorFacService, $location, $stateParams, $http, PostDataService) {
+    "$location","$stateParams", "$http", "PostDataService", "$timeout",function ($rootScope, $scope, $interval,
+        ngDialog, MonitorFacService, $location, $stateParams, $http, PostDataService,
+        $timeout) {
         console.log("monitorController", "start!!!");
         //页面UI初始化；
         $scope.topic_id = null;
@@ -12,6 +13,9 @@ CQ.mainApp.monitorController
         $scope.dataType = $stateParams.dataType;
         $scope.siteId = $stateParams.siteId;
         $scope.freshLists = [];
+        $scope.cons = {};
+        $scope.pics = ["/static/assets/img/news2.svg","/static/assets/img/luntan.svg", "/static/assets/img/weibo.svg"
+        ,"/static/assets/img/tieba.svg","/static/assets/img/weixin1.svg","/static/assets/img/baidu.svg"];
         $scope.$on('$viewContentLoaded', function() {
             if($rootScope.mainController) {
                 console.log("monitor app start!!!");
@@ -25,6 +29,7 @@ CQ.mainApp.monitorController
             cons.siteId = $scope.siteId;
             cons.date = "2017-01-08";
             cons.pageCount = 20;
+            $scope.cons = angular.copy(cons);
             MonitorFacService.getMonitorData(cons).then(function(res){
                 console.log(res);
                 $scope.monitorData = res;
@@ -46,7 +51,7 @@ CQ.mainApp.monitorController
                     topicLists.push(tl);
                 });
                 cons.topicLists = topicLists;
-                console.log(JSON.stringify(cons));
+                //console.log(JSON.stringify(cons));
                     PostDataService.flushData(cons).then(function(freshdata) {
                         console.log(freshdata.data.data);
                         var res = freshdata.data.data;
@@ -55,18 +60,23 @@ CQ.mainApp.monitorController
                                 if(rr.topicId == d.topicId){
                                     d.newTime = rr.newTime;
                                     if(rr.postData.length != 0) {
+                                        d.count = rr.count;
+                                        $(".addnums").slideDown("slow");
                                         d.postData = rr.postData.concat(d.postData);
                                     }
                                 }
                             });
                         });
-                        console.log($scope.monitorData);
+                        //console.log($scope.monitorData);
+                        $timeout(function(){
+                            $(".addnums").slideUp("slow");
+                        }, 4000);
                         $(".loads").slideUp("slow");
                     },function(error) {
                         $(".loads").slideUp("slow");
                         console.log(error);
                     });
-            },10000);
+            },30000);
             $scope.freshLists.push(ll);
             // $http.post('http://117.32.155.61:9091/yqdata/monitor/flush/', JSON.stringify(cons))
             //     .success(function(rr){
@@ -98,26 +108,16 @@ CQ.mainApp.monitorController
                 $interval.cancel(d);
            });
         }); 
-        $scope.post = '<li class="media media-sm">'+
-                        '<a href="javascript:;" class="pull-left">' +
-                            '<img src="/static/assets/img/user-1.jpg" alt="" class="media-object rounded-corner">'+
-                        '</a>'+
-                        '<div class="media-body">'+
-                            '<a href="javascript:;"><h4 class="media-heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4></a>'+
-                            '<p class="m-b-5">'+
-                                'Aenean mollis arcu sed turpis accumsan dignissim. Etiam vel tortor at risus tristique convallis. Donec adipiscing euismod arcu id euismod. Suspendisse potenti. Aliquam lacinia sapien ac urna placerat, eu interdum mauris viverra.'+
-                            '</p>'+
-                            '<i class="text-muted">Received on 04/16/2013, 12.39pm</i>'+
-                        '</div>'+
-                     '</li>';
         // move positions
         $scope.movePosition = function(topic_id) {
             console.log(topic_id);
             var ht = $("#topic_"+topic_id+"");
             if($("#topic_"+topic_id+"")) {
-                //$("#topic_"+topic_id+"").hide("slow");
-                $("#topicLists").prepend(ht);
-                $("#topic_"+topic_id+"").fadeIn("slow");
+                $("#topic_"+topic_id+"").hide("slow");
+                $timeout(function(){
+                    $("#topicLists").prepend(ht);
+                    $("#topic_"+topic_id+"").fadeIn("2000");
+                },500);
             }
         };
         $scope.openDia = function(topic_id, topic_name) {
@@ -133,10 +133,48 @@ CQ.mainApp.monitorController
         };
         $scope.refreshData = function(topic_id) {
             var doms = "#topic_" + topic_id;
-            //angular.element(doms).find(".loads").removeClass("hidden");
-            // $interval(function(){
-            //     angular.element(doms).find(".loads").addClass("hidden");
-            // }, 5000);
+            angular.element(doms).find(".loads").slideDown("slow");
+                var topicLists = [];
+                $scope.monitorData.forEach(function (d) {
+                    if(d.topicId == topic_id) {
+                        var tl = {};
+                        tl.topicId = d.topicId;
+                        tl.newTime = d.newTime;
+                        topicLists.push(tl);
+                    }
+                });
+            $scope.cons.topicLists = topicLists;
+            //console.log(JSON.stringify($scope.cons));
+            PostDataService.flushData($scope.cons).then(function(freshdata) {
+                console.log(freshdata.data.data);
+                var res = freshdata.data.data;
+                $scope.monitorData.forEach(function(d) {
+                    res.forEach(function(rr) {
+                        if(rr.topicId == d.topicId){
+                            d.newTime = rr.newTime;
+                            if(rr.postData.length != 0) {
+                                d.count = rr.count;
+                                angular.element(doms).find(".addnums").slideDown("slow");
+                                $timeout(function(){
+                                    d.postData = rr.postData.concat(d.postData);
+                                }, 100);
+                                //d.postData = rr.postData.concat(d.postData);
+                                //angular.element(doms).find(".addnums").slideUp("slow");
+                            }
+                        }
+                    });
+                });
+                //console.log($scope.monitorData);
+                angular.element(doms).find(".loads").slideUp("slow");
+                $timeout(function(){
+                        angular.element(doms).find(".addnums").slideUp("slow");
+                }, 4000);
+            },function(error) {
+                angular.element(doms).find(".loads").slideUp("slow");
+                angular.element(doms).find(".addnums").slideUp("slow");
+                console.log(error);
+            });
+            
         };
 
         $scope.showMore = function(topicId) {
@@ -253,6 +291,22 @@ CQ.mainApp.monitorController
         $scope.stopAnaly = function(analy_topic) {
             var anaDom = "#" + analy_topic;
             angular.element(anaDom).hide("slow");
+        };
+
+        $scope.addBg = function($event) {
+            //console.log($event.target);
+            var tt = $event.target;
+            if(angular.element(tt.closest("li")).hasClass("monitor-bg-color") == false) {
+                angular.element(tt.closest("li")).addClass("monitor-bg-color");
+                angular.element(tt.closest("li")).find(".iconslists").removeClass("ng-hide");
+            }
+        };
+        $scope.removeBg = function($event) {
+            var tt = $event.target;
+            if(angular.element(tt.closest("li")).hasClass("monitor-bg-color")) {
+                angular.element(tt.closest("li")).removeClass("monitor-bg-color");
+                angular.element(tt.closest("li")).find(".iconslists").addClass("ng-hide");
+            }
         };
 
    }])

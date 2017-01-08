@@ -13,6 +13,7 @@ angular.module('mainApp', [
     "ui.router",
     "ngResource",
     "ui.bootstrap",
+    "ngDraggable",
     "ngDialog",
     "frame.controller",
     "frame.services",

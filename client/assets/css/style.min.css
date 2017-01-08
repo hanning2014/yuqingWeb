@@ -7,7 +7,8 @@ Website: http://www.seantheme.com/color-admin-v1.5/admin/
 body {
   background: #d9e0e7;
   font-size: 12px;
-  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Microsoft Yahei", 微软雅黑, STHeiti, 华文细黑, sans-serif;
   color: #707478
 }
 

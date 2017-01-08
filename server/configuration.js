@@ -11,8 +11,8 @@ module.exports = {
         userToken: ""
 	},
     server: {
-        listenPort: 8090,
-        securePort: 8444,
+        listenPort: 8091,
+        securePort: 8445,
         distFolder: path.resolve(__dirname, "../client/"),
         staticUrl: "/static",
         sessionSecret: "cq-nodejs-vte",
