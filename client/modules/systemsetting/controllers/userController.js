@@ -8,7 +8,7 @@ CQ.mainApp.systemsettingController
         $scope.$on('$viewContentLoaded', function() {
             if($rootScope.mainController) {
                 $scope.userId = 1;
-                $scope.baseUrl = "http://117.32.155.61:9091/yqdata";
+                $scope.baseUrl = CQ.variable.RESTFUL_URL ;
                 var url = $scope.baseUrl+"/settopic/?userId=" + $scope.userId;
                 // var url = "/static/setup.json";
                 var sites = "";

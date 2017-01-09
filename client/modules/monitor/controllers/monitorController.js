@@ -14,6 +14,7 @@ CQ.mainApp.monitorController
         $scope.siteId = $stateParams.siteId;
         $scope.freshLists = [];
         $scope.cons = {};
+        $scope.date = getFormatData();
         $scope.pics = ["/static/assets/img/news2.svg","/static/assets/img/luntan.svg", "/static/assets/img/weibo.svg"
         ,"/static/assets/img/tieba.svg","/static/assets/img/weixin1.svg","/static/assets/img/baidu.svg"];
         $scope.$on('$viewContentLoaded', function() {
@@ -23,11 +24,23 @@ CQ.mainApp.monitorController
             }
         });
         getMonitorData();
+        $("#datepicker-default")
+            .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd' })
+            .on('changeDate', function(ev){
+                //console.log(ev);
+                //console.log($scope.date);
+                $scope.monitorData = [];
+                $scope.freshLists.forEach(function (d) {
+                $interval.cancel(d);
+                });
+                getMonitorData();
+
+            });
         function getMonitorData() {
             var cons = {};
             cons.dataType = $scope.dataType ;
             cons.siteId = $scope.siteId;
-            cons.date = "2017-01-08";
+            cons.date = $scope.date;
             cons.pageCount = 20;
             $scope.cons = angular.copy(cons);
             MonitorFacService.getMonitorData(cons).then(function(res){
@@ -39,6 +52,20 @@ CQ.mainApp.monitorController
             });
         };
 
+        // get format data
+        function getFormatData() {
+            var datetime = new Date();  
+            var year=datetime.getFullYear();//获取完整的年份(4位,1970)  
+            var month=datetime.getMonth()+1;//获取月份(0-11,0代表1月,用的时候记得加上1)  
+            if(month<=9){  
+                month="0"+month;  
+            }  
+            var date=datetime.getDate();//获取日(1-31)  
+            if(date<=9){  
+                date="0"+date;  
+            }  
+            return year+"-"+month+"-"+date;  
+        }
         // fresh data
         function getFreshData(cons) {
             var ll = $interval(function(){
@@ -108,6 +135,7 @@ CQ.mainApp.monitorController
                 $interval.cancel(d);
            });
         }); 
+
         // move positions
         $scope.movePosition = function(topic_id) {
             console.log(topic_id);
@@ -183,7 +211,7 @@ CQ.mainApp.monitorController
             var cons = {};
             cons.dataType = $scope.dataType ;
             cons.siteId = $scope.siteId;
-            cons.date = "2017-01-08";
+            cons.date = $scope.date;
             cons.pageCount = 20;
             cons.topicId = topicId;
             $scope.monitorData.forEach(function(d) {

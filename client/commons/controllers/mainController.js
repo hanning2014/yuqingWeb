@@ -31,7 +31,8 @@ CQ.mainApp.frameController
 	                App.runui();
 	            }
         	});
-			$http.get("http://117.32.155.61:9091/yqdata/dataSourceTree/").then(function(datas) {
+        	var urls = CQ.variable.RESTFUL_URL + "dataSourceTree/";
+			$http.get(urls).then(function(datas) {
 				var allsites = datas.data.data.allSites;
 				DataSourceTree.allLinks[2].items.forEach(function(si) {
 					allsites.forEach(function(ss) {
