@@ -42,6 +42,7 @@ CQ.mainApp.dashboardController
                         drawMap();
                 },function(error){
                     console.log(error);
+                    notice.notify_info("抱歉！","数据请求出错，请重试！","",false,"","");
                 });
             }
            
@@ -90,7 +91,7 @@ CQ.mainApp.dashboardController
                 height = $("#dayDist").height();
                 dayDist.width(width)
                         .height(height)
-                        .margins({top: 20, right: 10, bottom: 20, left: 30})
+                        .margins({top: 20, right: 10, bottom: 20, left: 40})
                         .dimension(dayDim)
                         .group(dayGroup)
                         .elasticY(true)

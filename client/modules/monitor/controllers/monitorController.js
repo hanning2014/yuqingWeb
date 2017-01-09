@@ -1,9 +1,9 @@
 "use strict";
 CQ.mainApp.monitorController
    .controller("monitorController", ["$rootScope", "$scope", "$interval", "ngDialog","MonitorFacService",
-    "$location","$stateParams", "$http", "PostDataService", "$timeout",function ($rootScope, $scope, $interval,
+    "$location","$stateParams", "$http", "PostDataService", "$timeout", "notice",function ($rootScope, $scope, $interval,
         ngDialog, MonitorFacService, $location, $stateParams, $http, PostDataService,
-        $timeout) {
+        $timeout, notice) {
         console.log("monitorController", "start!!!");
         //页面UI初始化；
         $scope.topic_id = null;
@@ -25,15 +25,21 @@ CQ.mainApp.monitorController
         });
         getMonitorData();
         $("#datepicker-default")
-            .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd' })
+            .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd'})
+            .datepicker('setEndDate', getFormatData())
             .on('changeDate', function(ev){
                 //console.log(ev);
                 //console.log($scope.date);
                 $scope.monitorData = [];
                 $scope.freshLists.forEach(function (d) {
-                $interval.cancel(d);
+                    $interval.cancel(d);
                 });
-                getMonitorData();
+                setTimeout(function(){
+                $scope.$apply(function(){
+                    getMonitorData();　　　//在这里去手动触发脏检查
+                });
+                },1000);
+                
 
             });
         function getMonitorData() {
@@ -49,6 +55,7 @@ CQ.mainApp.monitorController
                 getFreshData(cons);
             },function(error){
                 console.log(error);
+                notice.notify_info("抱歉！","数据请求出错，请重试！","",false,"","");
             });
         };
 
@@ -144,8 +151,8 @@ CQ.mainApp.monitorController
                 $("#topic_"+topic_id+"").hide("slow");
                 $timeout(function(){
                     $("#topicLists").prepend(ht);
-                    $("#topic_"+topic_id+"").fadeIn("2000");
-                },500);
+                    $("#topic_"+topic_id+"").fadeIn("slow");
+                },1000);
             }
         };
         $scope.openDia = function(topic_id, topic_name) {

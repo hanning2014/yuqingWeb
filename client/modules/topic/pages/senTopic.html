@@ -9,11 +9,11 @@
     <div class='row'>
         <div class="col-md-6 ui-sortable" ng-repeat="item in data">
             <!-- begin panel -->
-            <div class="panel panel-inverse" data-sortable-id="ui-media-object-3">
+            <div class="panel panel-primary" data-sortable-id="ui-media-object-3">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
                     </div>
-                    <h4 class="panel-title">{{item.topicName}}</h4>
+                    <h4 class="panel-title f-s-15">{{item.topicName}}</h4>
                 </div>
                 <div class="panel-body">
                     <div class="media media-lg">
@@ -36,8 +36,8 @@
                         </div>
                     </div>
                 </div>
-                <p class='text-right p-b-10'>
-                    <a href="javascript:;" class="btn btn-primary btn-xs m-r-10" ng-click="openModal(item.topicId)">话题分析</a>
+                <p class='text-right p-b-10 '>
+                    <a href="javascript:;" class="btn btn-primary btn-xs m-r-10 f-s-15" ng-click="openModal(item.topicId)">话题分析</a>
                 </p>
             </div>
         </div>
