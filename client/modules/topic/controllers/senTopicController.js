@@ -10,7 +10,6 @@ CQ.mainApp.topicController
                 console.log("topic app start!!!");
                 App.runui();
                 getTopicData();
-                //getData();
             }
         });
         
@@ -24,7 +23,7 @@ CQ.mainApp.topicController
                     d.imgs = imgs;
                 });
                 $scope.data = res;
-                setInterval(function(){
+                setTimeout(function(){
                     $scope.$apply(function(){
                             drawClouds();
                     　　　　});
@@ -89,6 +88,11 @@ CQ.mainApp.topicController
         console.log("topicAnalys", "start!!!");
         $scope.postData = null;
         $scope.eventData = null;
+        $scope.$on('$viewContentLoaded', function() {
+            if($rootScope.mainController) {
+                App.runui();
+            }
+        });
         getTopicAnalysData();
         function getTopicAnalysData() {
             var cons = {};
@@ -96,6 +100,9 @@ CQ.mainApp.topicController
             cons.topicId = $stateParams.topicId;
              TopicFacService.getTopicAnalyData(cons).then(function(res){
                 //console.log(res);
+                // res.postData.forEach(function(d) {
+                //     d.postTime = d.postTime.substring(0,10)
+                // });
                 $scope.postData = res.postData;
                 drawChart();
             },function(error) {
@@ -171,7 +178,7 @@ CQ.mainApp.topicController
              var dayDist2 = dc.barChart("#dayDist2");
              var dayDim2 = dayDim1;
              var dayGroup2 = dayDim2.group().reduceSum(function(d) {
-                return 0;
+                return 0.2;
              });
              dayDist1
                 .renderArea(true)
@@ -206,7 +213,7 @@ CQ.mainApp.topicController
                 .margins({top: 20, right: 10, bottom: 20, left: 30})
                 .dimension(dayDim2)
                 .group(dayGroup2)
-                .elasticY(true)
+                .elasticY(false)
                 .yAxisPadding('10%') //设置y轴距离顶部的距离(为了renderLabel才设置)
                 .centerBar(true)
                 .gap(1)
@@ -219,8 +226,9 @@ CQ.mainApp.topicController
                 .x(d3.time.scale().domain([$scope.postData[$scope.postData.length - 1].postTime, 
                     $scope.postData[0].postTime]))
                 .renderHorizontalGridLines(false)
-                .brushOn(true)
+                .brushOn(true);
             dayDist2.render();
-            $("#dayDist2 g.axis.y").html("");
+            $("#dayDist2 .y").html("");
+            $("#dayDist2 .y").remove();
         }
     }]);
