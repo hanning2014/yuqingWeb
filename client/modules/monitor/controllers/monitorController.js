@@ -273,11 +273,13 @@ CQ.mainApp.monitorController
             );
         };
         $scope.AddSenmessage = function(post_id) {
+            console.log(post_id);
             $scope.post_id = post_id;
             ngDialog.open(
             {
                 template: '/static/modules/monitor/pages/addsenmessage.html',
                 controller: 'addSenmessage',
+                appendClassName: "ngdialog-theme-enginesetting",
                 width: "100%",
                 scope: $scope
             }
@@ -380,10 +382,34 @@ CQ.mainApp.monitorController
        
         
    }])
-    .controller("addSenmessage", ["$rootScope","$scope","ngDialog", function($rootScope, $scope, ngDialog) {
+    .controller("addSenmessage", ["$rootScope","$scope","ngDialog", "MonitorFacService", "PostDataService", "notice",
+     function($rootScope, $scope, ngDialog, MonitorFacService, PostDataService, notice) {
         console.log("addSenmessage","start!!!");
+        //console.log($scope.post_id);
+        $scope.detailData = null;
         $scope.DoaddSen = function() {
-            ngDialog.closeAll();
+            console.log($scope.detailData);
+            var cons = {};
+            cons.userId = 1;
+            var postData = [];
+            postData.push($scope.detailData);
+            cons.postData = postData;
+            PostDataService.addSenmessage(cons).then(function(res) {
+                console.log(res);
+                ngDialog.closeAll();
+                notice.notify_info("您好","添加成功！","",false,"","");
+            },function(err) {
+                console.log(err);
+                notice.notify_info("您好","添加失败！请重试","",false,"","");
+            });
+            
         };
-       
+        MonitorFacService.getPostDetail({id: $scope.post_id, userId: 1}).then(function(res) {
+            console.log(res);
+            $scope.detailData = res[0];
+        }, function(err) {
+            notice.notify_info("您好","添加失败！请重试","",false,"","");
+            ngDialog.closeAll();
+            console.log(err);
+        });
    }]);
