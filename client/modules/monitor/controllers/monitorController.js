@@ -28,8 +28,6 @@ CQ.mainApp.monitorController
             .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd'})
             .datepicker('setEndDate', getFormatData())
             .on('changeDate', function(ev){
-                //console.log(ev);
-                //console.log($scope.date);
                 $scope.monitorData = [];
                 $scope.freshLists.forEach(function (d) {
                     $interval.cancel(d);
@@ -39,8 +37,6 @@ CQ.mainApp.monitorController
                     getMonitorData();　　　//在这里去手动触发脏检查
                 });
                 },1000);
-                
-
             });
         function getMonitorData() {
             var cons = {};
@@ -51,7 +47,11 @@ CQ.mainApp.monitorController
             $scope.cons = angular.copy(cons);
             MonitorFacService.getMonitorData(cons).then(function(res){
                 console.log(res);
+                res.unshift(res[res.length - 1]);
+                res.splice(res.length - 1, 1);
+                console.log(res);
                 $scope.monitorData = res;
+
                 getFreshData(cons);
             },function(error){
                 console.log(error);
@@ -112,30 +112,6 @@ CQ.mainApp.monitorController
                     });
             },30000);
             $scope.freshLists.push(ll);
-            // $http.post('http://117.32.155.61:9091/yqdata/monitor/flush/', JSON.stringify(cons))
-            //     .success(function(rr){
-            //         console.log(rr);
-            //     // some code
-            // });
-            // var ll = $interval(function(){
-            //     $(".loads").slideDown("slow");
-            //     //$(".loads").removeClass("hidden");
-            //     MonitorFacService.getFreshData(JSON.stringify(cons)).then(function(res) {
-            //         //$(".loads").addClass("hidden");
-            //         $(".loads").slideUp("slow");
-
-            //         console.log(res);
-            //     },function(error) {
-            //         $(".loads").slideUp("slow");
-            //         for(var i = 0; i < $(".panel").length; i ++) {
-            //             var t  =  $(".panel")[i];
-            //             var n = $(t).find(".panel-body");
-            //             $(n).find("ul .loads").after($scope.post);
-            //         }
-            //         console.log(error);
-            //     });
-            // },10000);
-           // $scope.freshLists.push(ll);
         }
         $scope.$on('$destroy',function(){
            $scope.freshLists.forEach(function (d) {
@@ -409,7 +385,7 @@ CQ.mainApp.monitorController
             $scope.detailData = res[0];
         }, function(err) {
             notice.notify_info("您好","添加失败！请重试","",false,"","");
-            ngDialog.closeAll();
+            //ngDialog.closeAll();
             console.log(err);
         });
    }]);

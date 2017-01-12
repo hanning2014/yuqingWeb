@@ -237,28 +237,28 @@ CQ.mainApp.systemsettingController
             });
         };
     }]);
-//CQ.mainApp.systemsettingController.directive('nameexistCheck', nameexistCheck);
+CQ.mainApp.systemsettingController.directive('nameexistCheck', nameexistCheck);
 
-// // nameexistCheck.$inject = ['$http', '$q'];
+// nameexistCheck.$inject = ['$http', '$q'];
 
-// function nameexistCheck(){
-//     return {
-//         restrict: 'A',
-//         require: 'ngModel',
-//         link:function($scope,element,attrs,ctrl){
-//             // 同步验证
-//             ctrl.$validators.exist = function(modelValue, viewValue) {
-//                 if($scope.modelName!='添加话题' || $scope.topicList == undefined)
-//                     return true;
-//                 var value = modelValue || viewValue; 
-//                 for(var index = 0; index<$scope.topicList.length; index++)
-//                 {
-//                     if($scope.topicList[index].topicName == value)
-//                     {console.log(false);
-//                         return false;}    
-//                 }
-//                 return true;
-//             };
-//         }
-//     }
-// }
+function nameexistCheck(){
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link:function($scope,element,attrs,ctrl){
+            // 同步验证
+            ctrl.$validators.exist = function(modelValue, viewValue) {
+                if($scope.modelName!='添加话题' || $scope.topicList == undefined)
+                    return true;
+                var value = modelValue || viewValue; 
+                for(var index = 0; index<$scope.topicList.length; index++)
+                {
+                    if($scope.topicList[index].topicName == value)
+                    {console.log(false);
+                        return false;}    
+                }
+                return true;
+            };
+        }
+    }
+}

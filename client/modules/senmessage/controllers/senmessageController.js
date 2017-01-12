@@ -6,7 +6,7 @@ CQ.mainApp.senmessageController
         $scope.sendata = null;
         $scope.pageSize = 5;
         $scope.pages = 10;
-        $scope.newpage = $scope.pages>5?5:$scope.pages;
+        $scope.newpage = $scope.pages > 5 ? 5:$scope.pages;
         $scope.pageList = [];
         $scope.pageNum = 1;
         $scope.date = getFormatData();
@@ -21,18 +21,18 @@ CQ.mainApp.senmessageController
             if (page < 1 || page > $scope.pages) return;
             //最多显示分页数5
             if (page > 2) {
-            //因为只显示5个页数，大于2页开始分页转换
-            var newpageList = [];
-            for (var i = (page - 3) ; i < ((page + 2) > $scope.pages ? $scope.pages : (page + 2)) ; i++) {
-            newpageList.push(i + 1);
+                //因为只显示5个页数，大于2页开始分页转换
+                var newpageList = [];
+                for (var i = (page - 3) ; i < ((page + 2) > $scope.pages ? $scope.pages : (page + 2)) ; i++) {
+                    newpageList.push(i + 1);
+                }
+                $scope.pageList = newpageList;
             }
-            $scope.pageList = newpageList;
-            }
-        $scope.pageNum = page;
-        $scope.dataObj.pageNum = page;
-        getData();
-        $scope.isActivePage(page);
-        console.log("选择的页：" + page);
+            $scope.pageNum = page;
+            $scope.dataObj.pageNum = page;
+            $scope.isActivePage(page);
+            console.log("选择的页：" + page);
+            getData();
         };
         $scope.isActivePage = function (page) {
             // return $scope.selPage == page;
@@ -55,23 +55,15 @@ CQ.mainApp.senmessageController
             if($rootScope.mainController) {
                 console.log("monitor app start!!!");
                 App.runui();
+                getData();
             }
         });
-            $("#datepicker-start")
-            .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd' })
-            .on('changeDate', function(ev){
-                //console.log(ev);
-                //console.log($scope.date);
-
-            });
+        $("#datepicker-start")
+        .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd' });
                $("#datepicker-end")
-            .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd' })
-            .on('changeDate', function(ev){
-                //console.log(ev);
-                //console.log($scope.date);
-
-            });
-            function getFormatData() {
+        .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd' });
+            
+        function getFormatData() {
             var datetime = new Date();
             var year=datetime.getFullYear();//获取完整的年份(4位,1970)
             var month=datetime.getMonth()+1;//获取月份(0-11,0代表1月,用的时候记得加上1)
@@ -89,7 +81,7 @@ CQ.mainApp.senmessageController
             DataObj.prototype.userId = 1;
             DataObj.prototype.pageCounts = 10;
             DataObj.prototype.pageNum = 1,
-            DataObj.prototype.is_report = 0,
+            DataObj.prototype.is_report = -1,
             DataObj.prototype.topicId = -1,
             DataObj.prototype.dataType =-1,
             DataObj.prototype.startDate = '""',
@@ -97,6 +89,7 @@ CQ.mainApp.senmessageController
         }
         //get data
         function getData (object) {
+            $scope.sendata = [];
             var cons = {
                         "userId":$scope.dataObj.userId,
                         "pageCounts":$scope.dataObj.pageCounts,
@@ -109,6 +102,11 @@ CQ.mainApp.senmessageController
                 };
             SenFacService.getSenLists(cons).then(function(res) {
                // console.log(res);
+                res.postData.forEach(function(d) {
+                    if(d.content.length > 40) {
+                        d.content = d.content.substring(0, 40) + "...";
+                    }
+                });
                 $scope.sendata = res.postData;
             });
         }
@@ -132,7 +130,7 @@ CQ.mainApp.senmessageController
                 scope: $scope
             }
         );
-    }
+    };
     // 撤销操作
     $scope.revoke = function(d)
     {

@@ -19,13 +19,13 @@ angular.module('settingservice',[])
                 icon:"",
                 items: ""
             },
-            {
-                label: "热点话题",
-                link: "#/hotTopic", 
-                hasShow:true,
-                icon:"",
-                items: ""
-            }
+            // {
+            //     label: "热点话题",
+            //     link: "#/hotTopic", 
+            //     hasShow:true,
+            //     icon:"",
+            //     items: ""
+            // }
         ];
         var monitorLists = [
             {
@@ -102,35 +102,35 @@ angular.module('settingservice',[])
         ];
         var senMessages = [
             {
-                label:"自动识别",
+                label:"敏感信息",
                 link: "#/senmessages",
                 hasShow: true,
                 icon: "",
                 items: ""
             },
-            {
-                label:"手工添加",
-                link: "#/addmessages",
-                hasShow: true,
-                icon: "",
-                items: ""
-            }
+            // {
+            //     label:"手工添加",
+            //     link: "#/addmessages",
+            //     hasShow: true,
+            //     icon: "",
+            //     items: ""
+            // }
         ];
         var systemSettings = [
             {
-                label:"用户设置",
+                label:"话题设置",
                 link: "#/userSetting",
                 hasShow: true,
                 icon: "",
                 items: ""
             },
-            {
-                label:"角色设置",
-                link: "#/roleSetting",
-                hasShow: true,
-                icon: "",
-                items: ""
-            }
+            // {
+            //     label:"角色设置",
+            //     link: "#/roleSetting",
+            //     hasShow: true,
+            //     icon: "",
+            //     items: ""
+            // }
         ];
         var yuqingSearch = [
             {

@@ -3,8 +3,8 @@
     <!-- begin row -->
     <div class="row">
         <div class="col-md-12">
-            <div class="email-btn-row hidden-xs">
-                <a href="#myModal" class="btn btn-sm btn-inverse" ng-click="newTopic()" data-toggle="modal" data-backdrop="false"><i class="fa fa-plus m-r-5"></i> 新建话题 </a>
+            <div class="email-btn-row hidden-xs f-s-15">
+                <a href="#myModal" class="btn btn-sm btn-primary" ng-click="newTopic()" data-toggle="modal" data-backdrop="false"><i class="fa fa-plus m-r-5"></i> 新建话题 </a>
                 <!-- <span class="dropdown">
                     <a href="email_inbox.html#" class="email-header-link btn btn-sm btn-inverse" data-toggle="dropdown">View All <i class="fa fa-angle-down m-l-5"></i></a>
                     <ul class="dropdown-menu">
@@ -39,7 +39,7 @@
                 </span> -->
             </div>
             <div class="email-content">
-                <table class="table table-email">
+                <table class="table table-email f-s-14">
                     <thead>
                         <tr>
                             <th ng-show = "false">ID</th>
@@ -125,9 +125,12 @@
                                         <!-- begin email subject -->
                                         <label class="control-label">查询关键字:</label>
                                         <div class="m-b-15">
-                                            <input type="text" name="keywords" class="form-control" ng-model="topic.topicKeywords" required="" ng-pattern="/^(([\u4e00-\u9fa5]|\w)+\,)*(([\u4e00-\u9fa5]|\w)+)$/"/>
-                                            <span class="pull-right text-danger" ng-show="topicForm.keywords.$error.required&&topicForm.keywords.$dirty">
-                                                关键字不能为空
+                                            <textarea type="text" name="keywords" class="form-control" ng-model="topic.topicKeywords" required="" ng-pattern="/^(([\u4e00-\u9fa5]|\w)+\,)*(([\u4e00-\u9fa5]|\w)+)$/"/>
+                                            <span class="pull-right text-danger" ng-show="topicForm.keywords.$error.require
+                                            &&topicForm.keywords.$dirty">
+                                            关键字不能为空
+                                            </textarea>
+                                                
                                             </span>
                                             <span class="pull-right text-danger" ng-show="topicForm.keywords.$error.pattern">
                                                 含有非法字符，关键字需以,隔开
