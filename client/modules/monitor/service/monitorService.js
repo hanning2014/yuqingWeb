@@ -8,7 +8,7 @@ angular.module('monitorService',['commons'])
         // load data
         factories.loadData = $resource(CQ.variable.RESTFUL_URL + "monitor/load/", parseResource.params, parseResource.actions);
         // get post detail data
-        factories.getPostDetail = $resource("http://117.32.155.61:9091/yqdata/senmassage/addui/", parseResource.params, parseResource.actions);
+        factories.getPostDetail = $resource(CQ.variable.RESTFUL_URL + "senmassage/addui/", parseResource.params, parseResource.actions);
         return factories;
     }])
     .factory("MonitorFacService",['MonitorFac', 'RestService', function(MonitorFac, RestService) {
@@ -35,7 +35,7 @@ angular.module('monitorService',['commons'])
         };
 
         factories.addSenmessage = function(data) {
-            return $http.post("http://117.32.155.61:9091/yqdata/senmassage/addmsg/", data);
+            return $http.post(CQ.variable.RESTFUL_URL + "senmassage/addmsg/", data);
         };
 
         return factories;
