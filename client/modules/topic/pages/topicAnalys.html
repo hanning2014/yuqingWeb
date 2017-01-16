@@ -9,9 +9,13 @@
     }
 </style>
 <div id="content" class="content">
-    <div class = "row">
+    <ol class="breadcrumb pull-right p-r-2" ng-show = "backTopic">
+        <li class = "fa fa-arrow-circle-left"><a href="javascript:;" ng-click="openModal()" >返回话题</a></li>
+    </ol>
+    <h1 class="page-header m-b-10"> {{topicName}} </h1>
+    <div class = "width-full">
         <!-- begin col-4 -->
-        <div class="col-md-6 animated fadeInLeft">
+        <div class="col-md-6 animated fadeInLeft p-l-0">
             <div class="panel panel-primary" data-sortable-id="index-1">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
@@ -30,7 +34,7 @@
             </div>
         </div>
          <!-- begin col-4 -->
-        <div class="col-md-6 animated fadeInLeft">
+        <div class="col-md-6 animated fadeInRight p-l-0">
             <div class="panel panel-primary" data-sortable-id="index-1">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
@@ -50,7 +54,7 @@
         </div>
 
          <!-- begin col-4 -->
-        <div class="col-md-12 animated fadeInLeft">
+        <div class="col-md-12 animated fadeInLeft p-l-0">
             <div class="panel panel-primary" data-sortable-id="index-1">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">

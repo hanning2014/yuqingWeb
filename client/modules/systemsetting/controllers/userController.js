@@ -184,14 +184,14 @@ CQ.mainApp.systemsettingController
         {
             $scope.maxPage = $scope.maxPage || 0;
             $scope.page = $scope.page || 0;
-            if(page>=0&&page<=$scope.maxPage)
+            if(page >= 0 && page<= $scope.maxPage)
             {
                 $scope.page = page;
             }
             var pageSize = 5.0;
             $scope.maxPage = Math.ceil($scope.topicList.length/pageSize) - 1;
             $scope.pageData = $scope.topicList.slice(pageSize * $scope.page, pageSize * ($scope.page + 1));
-        }
+        };
         //修改话题
         $scope.changeTopic = function(d){
                     $scope.modelName = "修改话题";
@@ -237,10 +237,8 @@ CQ.mainApp.systemsettingController
             });
         };
     }]);
+
 CQ.mainApp.systemsettingController.directive('nameexistCheck', nameexistCheck);
-
-// nameexistCheck.$inject = ['$http', '$q'];
-
 function nameexistCheck(){
     return {
         restrict: 'A',
@@ -254,8 +252,9 @@ function nameexistCheck(){
                 for(var index = 0; index<$scope.topicList.length; index++)
                 {
                     if($scope.topicList[index].topicName == value)
-                    {console.log(false);
-                        return false;}    
+                    {
+                        return false;
+                    }    
                 }
                 return true;
             };

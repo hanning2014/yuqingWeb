@@ -132,7 +132,7 @@
                                         <p class="m-b-5 m-t-5 f-s-14">
                                         <h4 class="media-heading f-s-15" ng-if = "it.title"
                                          ng-show = "it.board != 'Sina'">标题:{{it.title}}</h4>
-                                        <a  ng-if = "it.content" ng-href = "{{it.url}}" target="_blank" class = "f-s-14">
+                                        <a  ng-if = "it.content && it.data_type != 0" ng-href = "{{it.url}}" target="_blank" class = "f-s-14">
                                             {{it.content}}
                                         </a>
                                         </p>

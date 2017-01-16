@@ -44,7 +44,7 @@
                                 <table id="data-table" class="table table-striped table-bordered nowrap f-s-14" width="100%">
                                     <thead>
                                         <tr>
-                                            <th><input class="m-r-2" type="checkbox">标题</th>
+                                            <th><input class="m-r-2" type="checkbox" ng-model="allselected" ng-click="selectAll()">标题</th>
                                             <th>发布时间</th>
                                             <th>添加时间</th>
                                             <th>状态</th>
@@ -54,11 +54,11 @@
                                     <tbody>
                                         <tr class="odd gradeX" ng-repeat="item in sendata">
                                             <td class="width-lg" ng-if = "item.board != 'Sina'">
-                                                <input class="m-r-2" type="checkbox">
+                                                <input class="m-r-2" type="checkbox" ng-model="item.selected" ng-click="selectBoxChange(item)">
                                                 <a ng-href = {{item.url}} target= "_blank" >{{item.title}}</a>
                                             </td>
                                             <td class="width-lg" ng-if = "item.data_type == 2">
-                                                <input class="m-r-2" type="checkbox">
+                                                <input class="m-r-2" type="checkbox" ng-model="item.selected" ng-click="selectBoxChange(item)">
                                                 <a ng-href = {{item.url}} target= "_blank" >{{item.content}}</a>
                                             </td>
     
@@ -72,7 +72,7 @@
                                             <a style="line-height:normal" class="btn btn-xs" ng-click=""><i class="fa fa-lg fa-navicon"></i></a>
                                              <a style="line-height:normal" class="btn btn-xs" ng-click=""><i class="fa fa-lg fa-minus-square"></i></a>
                                              <a style="line-height:normal" class="btn btn-xs" ng-click=""><i class="fa fa-lg fa-caret-square-o-down"></i></a></td> -->
-                                             <td><a class="glyphicon glyphicon-list-alt p-r-2" style="cursor: pointer" title="查看元数据" ng-click = "getMetaData(item.id)"></a>|<a class="glyphicon glyphicon-transfer p-r-2" style="cursor: pointer" title="撤销可疑"></a>|<a class="glyphicon glyphicon-import" style="cursor: pointer" title="取证"></a>  </td>
+                                             <td><a class="glyphicon glyphicon-list-alt p-r-2" style="cursor: pointer" title="查看元数据" ng-click = "getMetaData(item.id)"></a>|<a class="glyphicon glyphicon-transfer p-r-2" style="cursor: pointer" title="撤销可疑" ng-click="revoke(item.id)"></a>|<a class="glyphicon glyphicon-import" style="cursor: pointer" title="取证" ng-click="forensics(item.id)"></a>  </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -93,17 +93,17 @@
 
                                <ul class="list-inline f-s-14 pull-right">
                                     <li>
-                                        <a class="btn btn-sm btn-primary" href="javascript:void;">
+                                        <a class="btn btn-sm btn-primary" href="javascript:void;" ng-click="changeState(1)">
                                             标为上报
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-sm btn-primary" href="javascript:void;">
+                                        <a class="btn btn-sm btn-primary" href="javascript:void;" ng-click="changeState(2)">
                                             标为已处理
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="btn btn-sm btn-primary" href="javascript:void;">
+                                        <a class="btn btn-sm btn-primary" href="javascript:void;" ng-click="revoke()">
                                             撤销可疑
                                         </a>
                                     </li>
@@ -112,7 +112,7 @@
                                         <a class="btn btn-sm btn-primary" href="javascript:void;" data-toggle="dropdown">
                                             导出下载 <i class="fa fa-angle-down m-l-5"></i>
                                         </a>
-                                        <ul class="dropdown-menu" style="position: relative; float: right; margin-top: -10px">
+                                        <ul class="dropdown-menu" style="float: right; margin-top: -10px">
                                             <li>
                                                 <a href="javascript:void;" ng-click="export('data-table','json')">json</a>
                                             </li>

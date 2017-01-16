@@ -21,9 +21,10 @@ CQ.mainApp.monitorController
             if($rootScope.mainController) {
                 console.log("monitor app start!!!");
                 App.runui();
+                getMonitorData();
             }
         });
-        getMonitorData();
+        
         $("#datepicker-default")
             .datepicker({todayHighlight:true, autoclose:true, format: 'yyyy-mm-dd'})
             .datepicker('setEndDate', getFormatData())
@@ -114,6 +115,7 @@ CQ.mainApp.monitorController
             $scope.freshLists.push(ll);
         }
         $scope.$on('$destroy',function(){
+            
            $scope.freshLists.forEach(function (d) {
                 $interval.cancel(d);
            });

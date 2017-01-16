@@ -122,7 +122,9 @@ CQ.mainApp.dashboardController
                     .group(topicGroup)
                     .x(d3.scale.linear().domain([6,20]))
                     .margins({ top: 0, right: 30, bottom: 20, left: 10 })
-                    .renderLabel(true)
+                    .label(function(d) {
+                        return d.key + ":" + d.value; })
+                    //.renderLabel(true)
                     .renderTitle(true)
                     .controlsUseVisibility(true)
                     .elasticX(true);

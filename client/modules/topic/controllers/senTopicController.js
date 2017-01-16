@@ -17,10 +17,22 @@ CQ.mainApp.topicController
             var cons = {};
             cons.userId = 1;
             TopicFacService.getTopicData(cons).then(function(res){
-                var imgs = ["/static/assets/img/1.jpg","/static/assets/img/2.jpg","/static/assets/img/3.jpg",
-                "/static/assets/img/4.jpg"];
+                console.log(res);
+                var imgs2 = ["/static/assets/img/1.jpg","/static/assets/img/2.jpg","/static/assets/img/3.jpg"];
+                var imgs3 = ["/static/assets/img/ky1.jpg","/static/assets/img/ky2.jpg","/static/assets/img/ky3.jpg"];
+                var imgs4 = ["/static/assets/img/gk1.jpg","/static/assets/img/gk2.jpg","/static/assets/img/gk3.jpg"];
+                var imgs9 = ["/static/assets/img/da1.jpg","/static/assets/img/da2.jpg","/static/assets/img/da3.jpg"];
                 res.forEach(function(d) {
-                    d.imgs = imgs;
+                    if(d.topicId == 2) {
+                        d.imgs = imgs2;
+                    }else if(d.topicId == 9) {
+                        d.imgs = imgs3;
+                    }else if(d.topicId == 4) {
+                        d.imgs = imgs4;
+                    }else if(d.topicId == 3) {
+                        d.imgs = imgs9;
+                    }
+                    //d.imgs = imgs;
                 });
                 $scope.data = res;
                 setTimeout(function(){
@@ -40,7 +52,7 @@ CQ.mainApp.topicController
                 var doms = "wordsCloud_" + d.topicId;
                 if(document.getElementById(doms) != undefined) {
                     //console.log("aaa");
-                    var chart = echarts.init(document.getElementById(doms));
+                var chart = echarts.init(document.getElementById(doms));
                 var options = {
                     series: [{
                         type: 'wordCloud',
@@ -83,17 +95,22 @@ CQ.mainApp.topicController
         };
 
     }])
-    .controller("topicAnalysController", ["$rootScope", "$scope", "$http", "$stateParams", "TopicFacService",
-        function($rootScope, $scope, $http, $stateParams, TopicFacService) {
+    .controller("topicAnalysController", ["$rootScope", "$scope", "$http", "$stateParams", "TopicFacService","$state",
+        function($rootScope, $scope, $http, $stateParams, TopicFacService, $state) {
         console.log("topicAnalys", "start!!!");
         $scope.postData = null;
         $scope.eventData = null;
+        $scope.topicName = "";
+        $scope.backTopic = false;
         $scope.$on('$viewContentLoaded', function() {
             if($rootScope.mainController) {
                 App.runui();
+                getTopicAnalysData();
             }
         });
-        getTopicAnalysData();
+        $scope.openModal = function(){
+            $state.go("topicController");
+        };
         function getTopicAnalysData() {
             var cons = {};
             cons.userId = 1;
@@ -103,16 +120,13 @@ CQ.mainApp.topicController
                 // res.postData.forEach(function(d) {
                 //     d.postTime = d.postTime.substring(0,10)
                 // });
+                $scope.topicName = res.topicName;
                 $scope.postData = res.postData;
+                $scope.backTopic = true;
                 drawChart();
             },function(error) {
                 console.log(error);
             });
-            // $http.get("/static/assets/data/topicAnaly.json").success(function(res){
-            //     $scope.postData = res.data.postData;
-            //     console.log($scope.postData);
-            //     drawChart();
-            // });
         }
         function drawChart() {
             var dateFormat =d3.time.format("%Y-%m-%d %H:%M:%S");
@@ -167,7 +181,8 @@ CQ.mainApp.topicController
                     .group(siteGroup)
                     .x(d3.scale.linear().domain([6,20]))
                     .margins({ top: 0, right: 30, bottom: 20, left: 10 })
-                    .renderLabel(true)
+                    .label(function(d) {
+                        return d.key + ":" + d.value; })
                     .renderTitle(true)
                     .controlsUseVisibility(true)
                     .elasticX(true);

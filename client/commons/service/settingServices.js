@@ -184,13 +184,13 @@ angular.module('settingservice',[])
                 icon: "fa fa-gear",
                 items: systemSettings
             },
-            {
-                label:"舆情检索",
-                link: "#/yuqingTrends",
-                hasShow: true,
-                icon: "fa fa-search",
-                items: yuqingSearch
-            }
+            // {
+            //     label:"舆情检索",
+            //     link: "#/yuqingTrends",
+            //     hasShow: true,
+            //     icon: "fa fa-search",
+            //     items: yuqingSearch
+            // }
         ];
         /**
          * 将json格式的数据转化为字符串作为value,以"jsondatas"为key

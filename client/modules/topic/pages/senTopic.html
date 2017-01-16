@@ -1,43 +1,33 @@
 <div id="content" class="content">
-    <!-- begin breadcrumb -->
-    <!-- <ol class="breadcrumb pull-right">
-        <li><a href="javascript:;">Home</a></li>
-        <li><a href="javascript:;">Page Options</a></li>
-        <li class="active">Blank Page</li>
-    </ol> -->
-    <!-- end breadcrumb -->
     <div class='row'>
-        <div class="col-md-6 ui-sortable" ng-repeat="item in data">
+        <div class="col-md-6 ui-sortable height-md" ng-repeat="item in data">
             <!-- begin panel -->
             <div class="panel panel-primary" data-sortable-id="ui-media-object-3">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
                     </div>
-                    <h4 class="panel-title f-s-16">{{item.topicName}}</h4>
+                    <h4 class="panel-title f-s-16">
+                    <img src = "/static/assets/img/topic.svg">
+                    {{item.topicName}}</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="media media-lg">
+                    <div class="col-md-12">
                         <!-- 轮播图 -->
-                        <div class='media-left col-md-6'>
+                        <div class='col-md-6'>
                             <carousel interval=5000 >
-                            <slide ng-repeat="slide in item.imgs" >
-                            <img ng-src="{{slide}}" style="width:100%;" class = "height-sm">
-                            <!-- <div class="carousel-caption">
-                                <p>{{slide.text}}</p>
-                            </div> -->
-                            </slide>
+                                <slide ng-repeat="slide in item.imgs" >
+                                <img ng-src="{{slide}}" class = "height-sm width-full">
+                                </slide>
                             </carousel>
                         </div>
-                        <div class="media-body col-md-6">
-                            <!-- <h4 class="media-heading"></h4> -->
-                            <!-- {{item.topicKeywords}} -->
-                            <div id = "wordsCloud_{{item.topicId}}" class = "width-sm height-sm">
+                        <div class="col-md-6">
+                            <div id = "wordsCloud_{{item.topicId}}" class = "width-full height-sm">
                             </div>
                         </div>
                     </div>
                 </div>
                 <p class='text-right p-b-10 '>
-                    <a href="javascript:;" class="btn btn-primary btn-xs m-r-10 f-s-15" ng-click="openModal(item.topicId)">话题分析</a>
+                    <a href="javascript:;" class="btn btn-primary btn-xs m-r-10 f-s-15 fa-bar-chart-o fa" ng-click="openModal(item.topicId)">话题分析</a>
                 </p>
             </div>
         </div>

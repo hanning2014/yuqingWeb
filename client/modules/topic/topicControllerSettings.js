@@ -12,14 +12,4 @@ CQ.mainApp.topicController
                 templateUrl: "/static/modules/topic/pages/topicAnalys.html",
                 controller: "topicAnalysController"
             });
-            // .state("", {
-            //     url:"",
-            //     templateUrl: "/static/modules/monitor/pages/monitor.html",
-            //     controller: "manageSettingController"
-            // })
-            // .state("", {
-            //     url:"",
-            //     templateUrl: "/static/modules/monitor/pages/monitor.html",
-            //     controller: "manageSettingController"
-            // })
     }]);
